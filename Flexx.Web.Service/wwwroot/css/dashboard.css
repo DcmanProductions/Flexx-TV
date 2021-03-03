@@ -1,0 +1,48 @@
+@import url('/css/carrosel.css');
+body{
+    background: url('/images/testBg.jpg');
+    background-repeat: none;
+    background-size: cover;
+    background-attachment: fixed;
+    color: white;
+}
+.caroselTitle{
+    font-size: 29px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+.caroselSeperator{
+    outline: 1px solid white;
+    width: 100%;
+}
+.dashboard{
+    position: relative;
+    margin: 25px;
+}
+.mediaItem{
+    transition: .2s;
+    margin-top: 30px;
+    width: 210px;
+    height: 315px;
+    margin-right:25px; 
+    background-image: url('/images/testPoster.jpg');
+}
+.itemCarosel ul{
+    overflow: hidden;
+    height: 375px;
+}
+.itemCarosel ul li{
+    float: left;
+}
+
+.mediaItem.seemore{
+    background: var(--background);
+    font-size: 70px;
+    text-align: center;
+    padding-top: 25%;
+}
+
+.mediaItem:hover{
+    transform: scale(1.05);
+    cursor: pointer;
+}

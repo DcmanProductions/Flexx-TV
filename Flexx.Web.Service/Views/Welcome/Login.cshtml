@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<link rel="stylesheet" href="/css/login-signup.css">
+
+<div class="shadowed-bg page-overlay"></div>
+@Html.PartialAsync("Welcome/_Nav").Result
+<div class="center">
+    <div id="LoginForm">
+        <header>Login</header>
+        <form action="/Dashboard/index.html">
+            <div class="field">
+                <input type="email" name="email" id="email" placeholder="Email" required>
+                <label for="email">Email</label>
+            </div>
+            <div class="field">
+                <input type="password" name="passwd" id="passwd" placeholder="Password" required>
+                <label for="passwd">Password</label>
+            </div>
+            <div class="btn btn-outline-primary" onclick="document.getElementById('rmberme').checked = !document.getElementById('rmberme').checked">
+                <label class="checkbox-button">
+                    <span class="checkbox-button__label">Remember ME</span>
+                    <input type="checkbox" class="checkbox-button__input" id="rmberme" name="rmberme">
+                    <span class="checkbox-button__control"></span>
+                </label>
+            </div>
+            <button id="submit-btn" class="btn" type="submit">Login</button>
+        </form>
+        <p id="extra-info">Don't Have an Account?<br><a href="@Url.Action("SignUp", "Welcome")">Click Here to Sign Up</a></p>
+    </div>
+</div>

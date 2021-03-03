@@ -1,0 +1,29 @@
+body{
+    background: url('/images/CoverArtBG.jpg');
+    background-repeat: none;
+    background-size: auto;
+    color: white;
+}
+
+#LoginForm{
+    z-index: 10;
+    width: 437px;
+    justify-self: center;
+    text-align: center;
+    background-color: var(--background);
+    padding: 25px;
+}
+
+#LoginForm header{
+    font-size: 70px;
+    font-weight: 400;
+    margin-top: 25px;
+}
+#submit-btn{
+    margin: 35px 0px;
+    padding: 25px;
+    font-size: 20px;
+    width: 100%;
+}
+#extra-info{
+}

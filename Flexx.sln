@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31019.35
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flexx.Web.Service", "Flexx.Web.Service\Flexx.Web.Service.csproj", "{50C45B9E-3EB5-4CD7-B9F8-78614DAD2C75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flexx.Core", "Flexx.Core\Flexx.Core.csproj", "{A1EB3D7F-7D74-4EB9-867A-6EF8F2C22C51}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{50C45B9E-3EB5-4CD7-B9F8-78614DAD2C75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50C45B9E-3EB5-4CD7-B9F8-78614DAD2C75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50C45B9E-3EB5-4CD7-B9F8-78614DAD2C75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50C45B9E-3EB5-4CD7-B9F8-78614DAD2C75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1EB3D7F-7D74-4EB9-867A-6EF8F2C22C51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1EB3D7F-7D74-4EB9-867A-6EF8F2C22C51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1EB3D7F-7D74-4EB9-867A-6EF8F2C22C51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1EB3D7F-7D74-4EB9-867A-6EF8F2C22C51}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {92DFFAC7-B7ED-4530-AA02-A1C6F42A70AF}
+	EndGlobalSection
+EndGlobal
