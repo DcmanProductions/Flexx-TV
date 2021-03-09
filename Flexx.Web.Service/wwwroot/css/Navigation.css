@@ -1,0 +1,127 @@
+﻿
+
+#nav {
+    position: relative;
+    z-index: 99;
+    margin-bottom: 75px;
+    color: white;
+    width: 100%;
+    height: 100px;
+}
+
+    #nav #navigation {
+        position: absolute;
+        margin: 25px;
+        right: 25px;
+        top: 5px;
+    }
+
+        #nav #navigation li {
+            float: left;
+        }
+
+        #nav #navigation ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+    #nav #branding {
+        font-size: 40px;
+        font-weight: 100;
+        padding: 25px;
+    }
+
+#nav-bg {
+    position: absolute;
+    color: white;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100px;
+    z-index: -1;
+    opacity: .5;
+}
+
+#nav #branding {
+    transition: .2s;
+    opacity: .7;
+    cursor: pointer;
+    width: fit-content;
+    height: fit-content;
+}
+
+    #nav #branding:hover {
+        opacity: 1;
+        transform: scale(1.01);
+        color: var(--primary);
+        font-weight: 400;
+    }
+
+
+#nav #navigation-left {
+    position: absolute;
+    margin: 25px;
+    left: 125px;
+    top: 20px;
+    height: 100%;
+}
+
+    #nav #navigation-left li {
+        float: left;
+        margin-right: 25px;
+    }
+
+    #nav #navigation-left ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        margin-left: 25px;
+    }
+
+.navItem {
+    opacity: .5;
+}
+
+    .navItem.active, .navItem:hover {
+        opacity: 1;
+    }
+
+    .navItem:hover {
+        cursor: pointer;
+    }
+
+#navSeperator {
+    position: absolute;
+    top: -15px;
+    height: 50px;
+}
+
+.submenu .submenuBody {
+    display: none;
+    background: var(--background);
+    padding: 10px 0px;
+    position: absolute;
+    width: 100%;
+    margin-top: 1px;
+}
+
+.submenu:hover .submenuBody {
+    display: block;
+}
+
+.submenu .submenuBody li {
+    display: inline-block;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 5px;
+    padding-top: 16px;
+    float: none;
+    text-align: center;
+    background-color: transparent;
+}
+
+    .submenu .submenuBody li:hover {
+        background-color: var(--primary);
+        cursor: pointer;
+    }
