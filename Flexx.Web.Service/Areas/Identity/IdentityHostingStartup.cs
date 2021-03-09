@@ -1,9 +1,6 @@
-﻿using System;
-using com.drewchaseproject.net.Flexx.Web.Service.Areas.Identity.Data;
+﻿using com.drewchaseproject.net.Flexx.Web.Service.Areas.Identity.Data;
 using com.drewchaseproject.net.Flexx.Web.Service.Data;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,12 +12,21 @@ namespace com.drewchaseproject.net.Flexx.Web.Service.Areas.Identity
     {
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) => {
+            builder.ConfigureServices((context, services) =>
+            {
                 services.AddDbContext<Context>(options =>
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("ContextConnection")));
 
-                services.AddDefaultIdentity<FlexxUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                services.AddDefaultIdentity<FlexxUser>(options =>
+                {
+                    options.SignIn.RequireConfirmedAccount = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequiredUniqueChars = 0;
+
+                })
                     .AddEntityFrameworkStores<Context>();
             });
         }
