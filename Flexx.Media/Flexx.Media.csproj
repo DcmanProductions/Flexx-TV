@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>com.drewchaseproject.net.Flexx.Core</RootNamespace>
-    <AssemblyName>flexxLib</AssemblyName>
+    <RootNamespace>com.drewchaseproject.net.Flexx.Media</RootNamespace>
+    <AssemblyName>flexxMediaLib</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -12,8 +12,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ChaseLabs.Configuration" Version="0.0.4" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="TorrentTitleParser" Version="1.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Flexx.Core\Flexx.Core.csproj" />
   </ItemGroup>
 
 </Project>
