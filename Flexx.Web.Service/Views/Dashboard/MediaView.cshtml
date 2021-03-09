@@ -1,0 +1,104 @@
+﻿@model com.drewchaseproject.net.Flexx.Media.Libraries.Movies.MovieModel
+@{
+    ViewData["Title"] = "View";
+}
+<link rel="stylesheet" href="/css/main.css">
+@Html.PartialAsync("Dashboard/_Nav").Result
+<link rel="stylesheet" href="~/css/movieView.css" />
+<link rel="stylesheet" href="~/css/dashboard.css" />
+<div id="movie">
+    <div id="moviePoster">
+        <div id="actions">
+            <ul class="center">
+                <li>
+                    <div id="playBtn">Play</div>
+                </li>
+                <li>
+                    <div id="resumeBtn">Resume</div>
+                </li>
+                <li>
+                    <div id="trailerBtn">Trailer</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="overview">
+        <div class="shadowed-bg"></div>
+        <div id="movieTitle">Outside the Wire</div>
+        <div id="movieTitleSeperator"></div>
+        <div id="movieSummery">In the near future, a drone pilot is sent into a deadly militarized zone and must work with an android officer to locate a doomsday device.</div>
+        <div id="movieExecutives">
+
+            <div id="movieExecutivesSeperator"></div>
+            <ul>
+                <li>
+                    <div class="executiveTitle">Director</div>
+                    <div class="executiveName">Mikael Håfström</div>
+                </li>
+                <li>
+                    <div class="executiveTitle">Writer</div>
+                    <div class="executiveName">Rob Yescombe</div>
+                </li>
+                <li>
+                    <div class="executiveTitle">Writer</div>
+                    <div class="executiveName">Rowan Athale</div>
+                </li>
+                <li>
+                    <div class="executiveTitle">Writer</div>
+                    <div class="executiveName">Alice Allemano</div>
+                </li>
+            </ul>
+        </div>
+        <div id="movieStats">
+            <div id="length">1h 56m</div>
+            <div id="rating">Rated R</div><br>
+            <div id="language">English</div>
+            <div id="resolution">1080p</div><br>
+            <div id="genres">
+                <ul>
+                    <li>Thriller,</li>
+                    <li>Action,</li>
+                    <li>Science Fiction</li>
+                </ul>
+            </div>
+        </div>
+        <div id="cast">
+            <ul>
+                <li>
+                    <div class="castCard">
+                        <img class="castImage"></img>
+                        <div class="actorName">Anthony Mackie</div>
+                        <div class="actorRole">Leo</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="castCard">
+                        <img class="castImage"></img>
+                        <div class="actorName">Anthony Mackie</div>
+                        <div class="actorRole">Leo</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="castCard">
+                        <img class="castImage"></img>
+                        <div class="actorName">Anthony Mackie</div>
+                        <div class="actorRole">Leo</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="castCard">
+                        <img class="castImage"></img>
+                        <div class="actorName">Anthony Mackie</div>
+                        <div class="actorRole">Leo</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="castCard">
+                        <img class="castImage"></img>
+                        <div class="actorName">Anthony Mackie</div>
+                        <div class="actorRole">Leo</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
