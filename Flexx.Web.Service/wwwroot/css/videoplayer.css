@@ -1,0 +1,8 @@
+    *{
+        --plyr-color-main: var(--primary);
+    }
+    .container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
