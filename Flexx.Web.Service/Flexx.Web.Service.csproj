@@ -5,7 +5,18 @@
     <UserSecretsId>691a3737-0e43-4459-856a-3f2b678551fc</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <RootNamespace>com.drewchaseproject.net.Flexx.Web.Service</RootNamespace>
+    <ApplicationIcon>wwwroot\favicon.ico</ApplicationIcon>
+    <AssemblyName>Flexx</AssemblyName>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\favicon.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.3" />
@@ -25,12 +36,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Dashboard\" />
-    <Folder Include="wwwroot\css\" />
+    <ProjectReference Include="..\Flexx.Core\Flexx.Core.csproj" />
+    <ProjectReference Include="..\Flexx.Media\Flexx.Media.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Flexx.Core\Flexx.Core.csproj" />
-  </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="if $(ConfigurationName) == Release (powershell Compress-Archive -Path  '$(TargetDir)*' -DestinationPath '$(SolutionDir)$(SolutionName).zip' -Force)" />
+  </Target>
 
 </Project>
