@@ -1,6 +1,9 @@
 ﻿using com.drewchaseproject.net.Flexx.Core.Data;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Text;
 using TorrentTitleParser;
 
 namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
@@ -18,7 +21,7 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
 
         public void GenerateDetails()
         {
-            Newtonsoft.Json.Linq.JToken obj = JSON.ParseJson(GetJsonResponse(GetTitleFromTorrentData()))["results"];
+            var obj = JSON.ParseJson(GetJsonResponse(GetTitleFromTorrentData()))["results"];
             Title = obj["original_title"].ToString();
             Year = short.TryParse(obj["release_date"].ToString().Split('-')[0].Replace("-", ""), out short _year) ? _year : 0000;
             System.IO.File.Move(Path, System.IO.Path.Combine(Directory.GetParent(Path).FullName, $"{Title} ({Year}).{Extension}"));

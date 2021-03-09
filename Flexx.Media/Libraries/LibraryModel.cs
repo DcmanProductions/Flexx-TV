@@ -1,4 +1,7 @@
 ﻿using ChaseLabs.CLConfiguration.List;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace com.drewchaseproject.net.Flexx.Media.Libraries
 {

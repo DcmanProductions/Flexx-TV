@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>com.drewchaseproject.net.Flexx.Media</RootNamespace>
     <AssemblyName>flexxMediaLib</AssemblyName>
+    <RootNamespace>com.drewchaseproject.net.Flexx.Media</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -19,5 +19,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Flexx.Core\Flexx.Core.csproj" />
   </ItemGroup>
-
 </Project>

@@ -1,5 +1,7 @@
 ﻿using com.drewchaseproject.net.Flexx.Core.Exceptions;
+using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace com.drewchaseproject.net.Flexx.Media.Libraries
 {
@@ -13,12 +15,9 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries
         /// <returns></returns>
         public LibraryModel GetByName(string name)
         {
-            foreach (LibraryModel model in this)
+            foreach (var model in this)
             {
-                if (model.Name.ToLower().Equals(name.ToLower()))
-                {
-                    return model;
-                }
+                if (model.Name.ToLower().Equals(name.ToLower())) return model;
             }
             throw new LibraryNotFoundException($"{name} was not found as a loaded library. Maybe it needs to be loaded or its missing.");
         }

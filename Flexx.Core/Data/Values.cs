@@ -20,11 +20,7 @@ namespace com.drewchaseproject.net.Flexx.Core.Data
             get
             {
                 string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), CompanyName, ApplicationName);
-                if (Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
-
+                if (Directory.Exists(path)) Directory.CreateDirectory(path);
                 return path;
             }
         }
@@ -33,11 +29,7 @@ namespace com.drewchaseproject.net.Flexx.Core.Data
             get
             {
                 string path = Path.Combine(RootDirectory, "Configuration");
-                if (Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
-
+                if (Directory.Exists(path)) Directory.CreateDirectory(path);
                 return path;
             }
         }
@@ -46,11 +38,7 @@ namespace com.drewchaseproject.net.Flexx.Core.Data
             get
             {
                 string path = Path.Combine(RootDirectory, "Logs");
-                if (Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
-
+                if (Directory.Exists(path)) Directory.CreateDirectory(path);
                 return path;
             }
         }

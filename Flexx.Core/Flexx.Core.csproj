@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>com.drewchaseproject.net.Flexx.Core</RootNamespace>
     <AssemblyName>flexxLib</AssemblyName>
   </PropertyGroup>

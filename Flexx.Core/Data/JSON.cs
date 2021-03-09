@@ -1,4 +1,7 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Newtonsoft.Json.Linq;
 
 namespace com.drewchaseproject.net.Flexx.Core.Data
 {
