@@ -1,3 +1,4 @@
+using com.drewchaseproject.net.Flexx.Core.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
@@ -7,6 +8,7 @@ namespace com.drewchaseproject.net.Flexx.Web.Service
     {
         public static void Main(string[] args)
         {
+            Configuration.Init();
             try
             {
                 CreateHostBuilder(args).Build().Run();
@@ -43,7 +45,7 @@ namespace com.drewchaseproject.net.Flexx.Web.Service
             {
                 webBuilder.UseStartup<Startup>().UseKestrel(options =>
                 {
-                    int port = 89715;
+                    int port = Configuration.WebPort;
                     options.ListenAnyIP(port);
                 });
             });
