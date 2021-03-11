@@ -1,6 +1,8 @@
 using com.drewchaseproject.net.Flexx.Core.Data;
+using com.drewchaseproject.net.Flexx.Media.Libraries;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using System.IO;
 
 namespace com.drewchaseproject.net.Flexx.Web.Service
 {
@@ -9,6 +11,7 @@ namespace com.drewchaseproject.net.Flexx.Web.Service
         public static void Main(string[] args)
         {
             Configuration.Init();
+            LibraryListModel.Singleton.CreateLibrary("movies", Path.Combine(Values.RootDirectory, "media"));
             try
             {
                 CreateHostBuilder(args).Build().Run();

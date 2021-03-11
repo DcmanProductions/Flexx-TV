@@ -1,4 +1,5 @@
-﻿using com.drewchaseproject.net.Flexx.Media.Libraries.Movies;
+﻿using com.drewchaseproject.net.Flexx.Media.Libraries;
+using com.drewchaseproject.net.Flexx.Media.Libraries.Movies;
 using Microsoft.AspNetCore.Mvc;
 namespace com.drewchaseproject.net.Flexx.Web.Service.Controllers
 {
@@ -15,7 +16,7 @@ namespace com.drewchaseproject.net.Flexx.Web.Service.Controllers
 
         public IActionResult MediaView(string movieName)
         {
-            MovieModel movie = new MovieModel();
+            MovieModel movie = LibraryListModel.Singleton.GetByName("Movie").Movies.GetByName(movieName);
             return View(movie);
         }
 
