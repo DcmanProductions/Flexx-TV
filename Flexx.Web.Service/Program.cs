@@ -3,7 +3,6 @@ using com.drewchaseproject.net.Flexx.Media.Libraries;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using System.IO;
-using TorrentTitleParser;
 
 namespace com.drewchaseproject.net.Flexx.Web.Service
 {

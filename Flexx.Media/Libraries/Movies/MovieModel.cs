@@ -1,7 +1,6 @@
 ﻿using ChaseLabs.CLConfiguration.List;
 using com.drewchaseproject.net.Flexx.Core.Data;
 using Newtonsoft.Json.Linq;
-using System;
 using System.IO;
 using System.Net;
 using TorrentTitleParser;
@@ -36,7 +35,11 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
             get
             {
                 string path = System.IO.Path.Combine(Path, "Poster.jpg");
-                if (!System.IO.File.Exists(path)) DownloadAssets();
+                if (!System.IO.File.Exists(path))
+                {
+                    DownloadAssets();
+                }
+
                 return path;
             }
         }
@@ -45,7 +48,11 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
             get
             {
                 string path = System.IO.Path.Combine(Path, "Cover.jpg");
-                if (!System.IO.File.Exists(path)) DownloadAssets();
+                if (!System.IO.File.Exists(path))
+                {
+                    DownloadAssets();
+                }
+
                 return path;
             }
         }
@@ -150,7 +157,10 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
             string movieFolder = System.IO.Path.Combine(Library.Path, formattedName);
             string newPath = Directory.GetParent(Path).FullName.Equals(formattedName) ? Path : System.IO.Path.Combine(movieFolder, formattedName_Ext);
             if (!Directory.Exists(movieFolder))
+            {
                 Directory.CreateDirectory(movieFolder);
+            }
+
             if (!Path.Equals(newPath))
             {
                 System.IO.File.Move(Path, newPath, true);
@@ -174,12 +184,20 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
 
         private void DownloadPoster()
         {
-            if (string.IsNullOrWhiteSpace(PosterURL)) GenerateDetails(true);
+            if (string.IsNullOrWhiteSpace(PosterURL))
+            {
+                GenerateDetails(true);
+            }
+
             new WebClient().DownloadFile(PosterURL, System.IO.Path.Combine(Directory.GetParent(Path).FullName, "Poster.jpg"));
         }
         private void DownloadCover()
         {
-            if (string.IsNullOrWhiteSpace(CoverURL)) GenerateDetails(true);
+            if (string.IsNullOrWhiteSpace(CoverURL))
+            {
+                GenerateDetails(true);
+            }
+
             new WebClient().DownloadFile(CoverURL, System.IO.Path.Combine(Directory.GetParent(Path).FullName, "Cover.jpg"));
         }
 

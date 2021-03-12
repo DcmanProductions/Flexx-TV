@@ -1,5 +1,4 @@
 ﻿using com.drewchaseproject.net.Flexx.Core.Exceptions;
-using System;
 using System.Collections.Generic;
 
 namespace com.drewchaseproject.net.Flexx.Media.Libraries
@@ -15,7 +14,11 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries
         {
             get
             {
-                if (_singleton == null) _singleton = new LibraryListModel();
+                if (_singleton == null)
+                {
+                    _singleton = new LibraryListModel();
+                }
+
                 return _singleton;
             }
         }

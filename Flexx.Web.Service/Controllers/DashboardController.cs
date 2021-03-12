@@ -1,9 +1,6 @@
-﻿using com.drewchaseproject.net.Flexx.Core.Data;
-using com.drewchaseproject.net.Flexx.Media.Libraries;
+﻿using com.drewchaseproject.net.Flexx.Media.Libraries;
 using com.drewchaseproject.net.Flexx.Media.Libraries.Movies;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.IO;
 
 namespace com.drewchaseproject.net.Flexx.Web.Service.Controllers
 {
