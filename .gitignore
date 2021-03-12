@@ -87,7 +87,6 @@ StyleCopReport.xml
 *.pidb
 *.svclog
 *.scc
-plyr.*
 # Chutzpah Test files
 _Chutzpah*
 
@@ -339,3 +338,5 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /Flexx.zip
+Flexx.Web.Service/wwwroot/css/plyr.css
+Flexx.Web.Service/wwwroot/js/plyr.js
