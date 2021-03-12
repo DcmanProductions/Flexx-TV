@@ -20,13 +20,10 @@
         <div id="actions">
             <ul class="center">
                 <li>
-                    <div id="playBtn">Play</div>
+                    <div id="playBtn"  onclick="alert('Not Ready Yet')">Play</div>
                 </li>
                 <li>
-                    <div id="resumeBtn">Resume</div>
-                </li>
-                <li>
-                    <div id="trailerBtn">Trailer</div>
+                    <div id="trailerBtn" onclick="window.location.href = '/Movies/@Model.Title/Trailer'">Trailer</div>
                 </li>
             </ul>
         </div>
@@ -42,20 +39,16 @@
             <ul>
                 <li>
                     <div class="executiveTitle">Director</div>
-                    <div class="executiveName">Mikael Håfström</div>
+                    <div class="executiveName">@Model.Directors[0].ActorName</div>
                 </li>
-                <li>
-                    <div class="executiveTitle">Writer</div>
-                    <div class="executiveName">Rob Yescombe</div>
-                </li>
-                <li>
-                    <div class="executiveTitle">Writer</div>
-                    <div class="executiveName">Rowan Athale</div>
-                </li>
-                <li>
-                    <div class="executiveTitle">Writer</div>
-                    <div class="executiveName">Alice Allemano</div>
-                </li>
+                @for (int i = 0; i < Model.Writers.Count(); i++)
+                {
+                    if (i >= 3) return;
+                    <li>
+                        <div class="executiveTitle">Writer</div>
+                        <div class="executiveName">@Model.Writers[i].ActorName</div>
+                    </li>
+                }
             </ul>
         </div>
         <div id="movieStats">
@@ -73,41 +66,18 @@
         </div>
         <div id="cast">
             <ul>
-                <li>
-                    <div class="castCard">
-                        <img class="castImage" />
-                        <div class="actorName">Anthony Mackie</div>
-                        <div class="actorRole">Leo</div>
-                    </div>
-                </li>
-                <li>
-                    <div class="castCard">
-                        <img class="castImage" />
-                        <div class="actorName">Anthony Mackie</div>
-                        <div class="actorRole">Leo</div>
-                    </div>
-                </li>
-                <li>
-                    <div class="castCard">
-                        <img class="castImage" />
-                        <div class="actorName">Anthony Mackie</div>
-                        <div class="actorRole">Leo</div>
-                    </div>
-                </li>
-                <li>
-                    <div class="castCard">
-                        <img class="castImage" />
-                        <div class="actorName">Anthony Mackie</div>
-                        <div class="actorRole">Leo</div>
-                    </div>
-                </li>
-                <li>
-                    <div class="castCard">
-                        <img class="castImage" />
-                        <div class="actorName">Anthony Mackie</div>
-                        <div class="actorRole">Leo</div>
-                    </div>
-                </li>
+                @for (int i = 0; i < Model.Actors.Count(); i++)
+                {
+                    if (i >= 5) return;
+
+                    <li>
+                        <div class="castCard">
+                            <img class="castImage" src="@Model.Actors[i].ProfilePictureURL" />
+                            <div class="actorName">@Model.Actors[i].ActorName</div>
+                            <div class="actorRole">@Model.Actors[i].CharacterName</div>
+                        </div>
+                    </li>
+                }
             </ul>
         </div>
     </div>

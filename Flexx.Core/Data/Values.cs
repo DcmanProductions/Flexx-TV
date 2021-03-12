@@ -85,15 +85,7 @@ namespace com.drewchaseproject.net.Flexx.Core.Data
         #endregion
         #endregion
         #region Functions
-        /// <summary>
-        /// Gets the Youtube Trailer URL based on The Movie Database ID
-        /// </summary>
-        /// <param name="ID"></param>
-        /// <returns></returns>
-        public static string GetTrailerURL(string ID)
-        {
-            return $"https://api.themoviedb.org/3/movie/{ID}/videos?api_key={TheMovieDBAPIKey}";
-        }
+        
         #endregion
 
     }

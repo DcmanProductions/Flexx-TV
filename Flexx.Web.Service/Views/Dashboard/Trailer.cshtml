@@ -1,0 +1,23 @@
+﻿@model com.drewchaseproject.net.Flexx.Media.Libraries.Movies.MovieModel
+@{
+    ViewData["Title"] = $"Playing Trailer for {Model.Title}";
+}
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="~/css/movieView.css" />
+<link rel="stylesheet" href="~/css/dashboard.css" />
+<link rel="stylesheet" href="/css/plyr.css" />
+<link rel="stylesheet" href="/css/videoplayer.css">
+<div id="videoView">
+    <div id="exitBtn" onclick="window.location.href = '/Movies/@Model.Title'">X</div>
+    <div class="container">
+        <video controls data-plyr="pip" src="@Model.DirectVideoTrailer"></video>
+    </div>
+    <script src="/js/plyr.js"></script>
+    <script src="/js/videoplayer.js"></script>
+</div>
+
+<script>
+    player.on("ended", event => {
+        window.location.href = '/Movies/@Model.Title';
+    });
+</script>

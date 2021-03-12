@@ -24,6 +24,12 @@ namespace com.drewchaseproject.net.Flexx.Web.Service.Controllers
             MovieModel movie = LibraryListModel.Singleton.GetByName("movies").Movies.GetByName(movieName);
             return View(movie);
         }
+        [Route("/Movies/{movieName}/Trailer")]
+        public IActionResult Trailer(string movieName)
+        {
+            MovieModel movie = LibraryListModel.Singleton.GetByName("movies").Movies.GetByName(movieName);
+            return View(movie);
+        }
 
     }
 }

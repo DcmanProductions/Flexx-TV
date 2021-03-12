@@ -1,8 +1,7 @@
-    *{
-        --plyr-color-main: var(--primary);
-    }
-    .container {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-    }
+* {
+    --plyr-color-main: var(--primary);
+}
+
+.plyr__video-wrapper{
+    height: 100vh;
+}
