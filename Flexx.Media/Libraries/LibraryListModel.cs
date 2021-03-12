@@ -1,4 +1,5 @@
 ﻿using com.drewchaseproject.net.Flexx.Core.Exceptions;
+using System;
 using System.Collections.Generic;
 
 namespace com.drewchaseproject.net.Flexx.Media.Libraries
@@ -44,9 +45,10 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries
         /// <param name="Name"></param>
         /// <param name="Path"></param>
         /// <returns></returns>
-        public LibraryModel CreateLibrary(string Name, string Path)
+        public LibraryModel CreateLibrary(string Name, string Path, Core.Data.Values.LibraryType type)
         {
-            LibraryModel model = new LibraryModel() { Name = Name, Path = Path, Type = Core.Data.Values.LibraryType.Movies };
+
+            LibraryModel model = new LibraryModel() { Name = Name, Path = System.IO.Path.Combine(Path, Name), Type = type };
             Add(model);
             model.GenerateLibraryItems();
             return model;

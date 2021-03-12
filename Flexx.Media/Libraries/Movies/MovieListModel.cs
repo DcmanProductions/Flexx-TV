@@ -35,13 +35,14 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
         /// <returns></returns>
         public static MovieListModel GenerateListFromLibrary(LibraryModel library)
         {
+            string[] MediaExtensions = new string[] { "mpegg", "mpeg", "mp4", "mkv", "m4a", "m4v", "f4v", "f4a", "m4b", "m4r", "f4b", "mov", "3gp", "3gp2", "3g2", "3gpp", "3gpp2", "ogg", "oga", "ogv", "ogx", "wmv", "wma", "flv", "avi" };
             MovieListModel model = new MovieListModel();
-            Directory.GetFiles(library.Path, "*", SearchOption.AllDirectories).ToList().ForEach(item =>
-            {
-                MovieModel value = new MovieModel() { Path = item, Library = library };
-                value.GenerateDetails();
-                model.Add(value);
-            });
+            Directory.GetFiles(library.Path, "*", SearchOption.AllDirectories).Where(item => MediaExtensions.Any(item.ToLower().EndsWith)).ToList().ForEach(item =>
+             {
+                 MovieModel value = new MovieModel() { Path = item, Library = library };
+                 value.GenerateDetails();
+                 model.Add(value);
+             });
             return model;
         }
     }

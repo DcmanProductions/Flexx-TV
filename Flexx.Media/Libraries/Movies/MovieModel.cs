@@ -1,5 +1,7 @@
 ﻿using ChaseLabs.CLConfiguration.List;
 using com.drewchaseproject.net.Flexx.Core.Data;
+using Newtonsoft.Json.Linq;
+using System;
 using System.IO;
 using System.Net;
 using TorrentTitleParser;
@@ -27,6 +29,26 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
         /// The Movie summery or synopsis.
         /// </summary>
         public string Summery { get; private set; }
+        public string PosterURL { get; private set; }
+        public string CoverURL { get; private set; }
+        public string PosterPath
+        {
+            get
+            {
+                string path = System.IO.Path.Combine(Path, "Poster.jpg");
+                if (!System.IO.File.Exists(path)) DownloadAssets();
+                return path;
+            }
+        }
+        public string CoverPath
+        {
+            get
+            {
+                string path = System.IO.Path.Combine(Path, "Cover.jpg");
+                if (!System.IO.File.Exists(path)) DownloadAssets();
+                return path;
+            }
+        }
         /// <summary>
         /// The Path to the Media File
         /// </summary>
@@ -68,28 +90,52 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
         /// </list>
         /// </summary>
         /// <returns>Path to the <seealso cref="SMDFile"/> File</returns>
-        public string GenerateDetails()
+        public string GenerateDetails(bool force = false)
         {
-            ConfigManager smd = new ConfigManager(System.IO.Path.Combine(Directory.GetParent(Path).FullName, $"{Title}.smb"));
-            if (HasSMD)
+            ConfigManager smd;
+            if (force)
             {
-                TMDBID = smd.GetConfigByKey("TMDBID").ParseInt();
-                Title = smd.GetConfigByKey("Title").Value;
-                Year = short.Parse(smd.GetConfigByKey("Year").Value);
-                Summery = smd.GetConfigByKey("Summery").Value;
+                smd = CreateSMD();
             }
             else
             {
-                SetDataBasedOnJSONResponse();
-                Organize();
-
-                // Adds items to the SMD File
-                smd.Add("TMDBID", TMDBID.ToString());
-                smd.Add("Title", Title);
-                smd.Add("Year", Year.ToString());
-                smd.Add("Summery", Summery);
+                if (HasSMD)
+                {
+                    smd = RetrieveSMD();
+                }
+                else
+                {
+                    smd = CreateSMD();
+                }
             }
             return smd.PATH;
+        }
+
+        private ConfigManager RetrieveSMD()
+        {
+            ConfigManager smd = new ConfigManager(System.IO.Path.Combine(Directory.GetParent(Path).FullName, $"{Title}.smb"));
+            TMDBID = smd.GetConfigByKey("TMDBID").ParseInt();
+            Title = smd.GetConfigByKey("Title").Value;
+            Year = short.Parse(smd.GetConfigByKey("Year").Value);
+            Summery = smd.GetConfigByKey("Summery").Value;
+            CoverURL = smd.GetConfigByKey("Cover").Value;
+            PosterURL = smd.GetConfigByKey("Poster").Value;
+            return smd;
+        }
+        private ConfigManager CreateSMD()
+        {
+            SetDataBasedOnJSONResponse();
+            Organize();
+            ConfigManager smd = new ConfigManager(System.IO.Path.Combine(Directory.GetParent(Path).FullName, $"{Title}.smb"));
+            // Adds items to the SMD File
+            smd.Add("TMDBID", TMDBID.ToString());
+            smd.Add("Title", Title);
+            smd.Add("Year", Year.ToString());
+            smd.Add("Summery", Summery);
+            smd.Add("Cover", CoverURL);
+            smd.Add("Poster", PosterURL);
+            DownloadAssets();
+            return smd;
         }
 
         /// <summary>
@@ -100,17 +146,41 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
         public void Organize()
         {
             string formattedName = $"{Title} ({Year})";
-            string formattedName_Ext = $"{formattedName}.{Extension}";
-            string newPath = Directory.GetParent(Path).FullName.Equals(formattedName) ? Path : System.IO.Path.Combine(Library.Path, formattedName, formattedName_Ext);
-            System.IO.File.Move(Path, System.IO.Path.Combine(Directory.GetParent(Path).FullName, formattedName_Ext));
+            string formattedName_Ext = $"{formattedName}{Extension}";
+            string movieFolder = System.IO.Path.Combine(Library.Path, formattedName);
+            string newPath = Directory.GetParent(Path).FullName.Equals(formattedName) ? Path : System.IO.Path.Combine(movieFolder, formattedName_Ext);
+            if (!Directory.Exists(movieFolder))
+                Directory.CreateDirectory(movieFolder);
+            if (!Path.Equals(newPath))
+            {
+                System.IO.File.Move(Path, newPath, true);
+                Path = newPath;
+            }
         }
         /// <summary>
         /// Will convert file name from the torrent name to perfered media formatting
         /// </summary>
         /// <returns></returns>
-        public string GetTitleFromTorrentData()
+        private string GetTitleFromTorrentData(bool withYear = true)
         {
-            return new Torrent(File).Title;
+            return new Torrent(File).Title + (withYear ? $"({ new Torrent(File).Year})" : "");
+        }
+
+        private void DownloadAssets()
+        {
+            DownloadPoster();
+            DownloadCover();
+        }
+
+        private void DownloadPoster()
+        {
+            if (string.IsNullOrWhiteSpace(PosterURL)) GenerateDetails(true);
+            new WebClient().DownloadFile(PosterURL, System.IO.Path.Combine(Directory.GetParent(Path).FullName, "Poster.jpg"));
+        }
+        private void DownloadCover()
+        {
+            if (string.IsNullOrWhiteSpace(CoverURL)) GenerateDetails(true);
+            new WebClient().DownloadFile(CoverURL, System.IO.Path.Combine(Directory.GetParent(Path).FullName, "Cover.jpg"));
         }
 
         /// <summary>
@@ -125,8 +195,19 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
         /// </summary>
         private void SetDataBasedOnJSONResponse()
         {
-            Newtonsoft.Json.Linq.JToken obj = JSON.ParseJson(GetJsonResponse(GetTitleFromTorrentData()))["results"];
+            JToken obj;
+            try
+            {
+                obj = JSON.ParseJson(GetJsonResponse(GetTitleFromTorrentData()))["results"][0];
+            }
+            catch
+            {
+                obj = JSON.ParseJson(GetJsonResponse(GetTitleFromTorrentData(false)))["results"][0];
+            }
             Title = obj["original_title"].ToString();
+            Summery = obj["overview"].ToString();
+            CoverURL = $"http://image.tmdb.org/t/p/original{obj["backdrop_path"].ToString()}";
+            PosterURL = $"http://image.tmdb.org/t/p/original{obj["poster_path"].ToString()}";
             TMDBID = int.Parse(obj["id"].ToString());
             Year = short.TryParse(obj["release_date"].ToString().Split('-')[0].Replace("-", ""), out short _year) ? _year : 0000;
         }

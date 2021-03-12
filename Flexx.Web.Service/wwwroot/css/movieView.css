@@ -1,40 +1,46 @@
-#movie{
+#movie {
     position: relative;
 }
-#moviePoster{
+
+#moviePoster {
     transition: 0.2s;
     position: relative;
-    background: url('/images/testPoster.jpg');
-    width:502px;
-    height:754px;
-    background-repeat: no-repeat;
-    background-size: cover;
+    width: 502px;
+    height: 754px;
     margin-left: 100px;
 }
 
-#overview{
+    #moviePoster img {
+        width: 100%;
+        height: 100%;
+    }
+
+#overview {
     position: absolute;
     right: 125px;
     top: 0px;
     width: 55%;
 }
-#movieTitle{
+
+#movieTitle {
     font-size: 65px;
     font-weight: 300;
 }
-#movieTitleSeperator{
+
+#movieTitleSeperator {
     outline: 1px solid white;
     width: 100%;
     height: 0px;
     margin-bottom: 25px;
 }
 
-#movieSummery{
+#movieSummery {
     font-size: 24px;
     font-weight: 600;
     margin: 10px 50px;
 }
-#overview .shadowed-bg{
+
+#overview .shadowed-bg {
     position: absolute;
     opacity: .5;
     z-index: -1;
@@ -42,30 +48,33 @@
     height: 75vh;
 }
 
-#movieExecutives{
+#movieExecutives {
     position: relative;
     margin-left: 50px;
     margin-top: 50px
 }
-#movieExecutives li{
-    display:block;
-    margin-bottom: 25px;
-}
-#movieExecutives .executiveTitle{
-    position: absolute;
-    text-align: right;
-    font-size: 14px;
-    font-weight:400;
-    left: -10px;
-    margin-top:5px;
-}
-#movieExecutives .executiveName{
-    font-size: 18px;
-    font-weight:600;
-    margin-left: 40px;
-}
 
-#movieExecutivesSeperator{
+    #movieExecutives li {
+        display: block;
+        margin-bottom: 25px;
+    }
+
+    #movieExecutives .executiveTitle {
+        position: absolute;
+        text-align: right;
+        font-size: 14px;
+        font-weight: 400;
+        left: -10px;
+        margin-top: 5px;
+    }
+
+    #movieExecutives .executiveName {
+        font-size: 18px;
+        font-weight: 600;
+        margin-left: 40px;
+    }
+
+#movieExecutivesSeperator {
     position: absolute;
     outline: 1px solid white;
     height: 100%;
@@ -73,119 +82,121 @@
     width: 0px;
 }
 
-#movieStats{
+#movieStats {
     position: absolute;
     float: right;
     right: 15%;
-    top:40%;
+    top: 40%;
     font-size: 18px;
 }
 
-#length{
+#length {
     position: relative;
-    float:left;
+    float: left;
     padding: 10px;
     margin-right: 25px;
     margin-bottom: 5px;
     width: fit-content;
-    height:30px;
+    height: 30px;
     text-align: center;
 }
 
-#rating{
+#rating {
     position: relative;
-    float:right;
+    float: right;
     margin-left: 25px;
     background-color: #494949;
     padding-top: 5px;
     margin-bottom: 5px;
     width: 83px;
-    height:30px;
+    height: 30px;
     text-align: center;
 }
-#language{
+
+#language {
     position: relative;
-    float:left;
+    float: left;
     margin-bottom: 5px;
     padding: 10px;
     margin-right: 25px;
     text-align: center;
     width: fit-content;
-    height:30px;
+    height: 30px;
 }
 
-#resolution{
+#resolution {
     position: relative;
-    float:right;
+    float: right;
     margin-left: 25px;
     margin-bottom: 5px;
     background-color: #494949;
-    padding-top:5px;
+    padding-top: 5px;
     width: 83px;
-    height:30px;
+    height: 30px;
     text-align: center;
 }
 
-#genres{
+#genres {
     position: relative;
     width: 100%;
     height: 100px;
     margin-top: 60px;
-    
-}
-#genres li{
-    display: block;
-    float:left;
-    margin-left: 5px;
 }
 
-#cast{
-    background:red;
+    #genres li {
+        display: block;
+        float: left;
+        margin-left: 5px;
+    }
+
+#cast {
+    background: red;
     position: relative;
     margin-top: 125px;
 }
 
-.castCard{
+.castCard {
     display: block;
-    float:left;
-    margin-right:50px;
-    background:white;
+    float: left;
+    margin-right: 50px;
+    background: white;
     width: 130px;
-    height:200px;
-    color:black;
+    height: 200px;
+    color: black;
     text-align: center;
     border-radius: 10px;
     transition: .2s;
 }
 
-.castCard:hover{
-    cursor:pointer;
-    transform:translateY(-13px) scale(1.01);
-}
+    .castCard:hover {
+        cursor: pointer;
+        transform: translateY(-13px) scale(1.01);
+    }
 
-img.castImage{
+img.castImage {
     width: 130px;
     height: 150px;
     margin-bottom: 10px;
     content: url('/images/testPoster.jpg');
 }
 
-.actorName{
+.actorName {
     font-size: 11px;
     margin-bottom: 5px;
     font-weight: 700;
 }
-.actorRole{
+
+.actorRole {
     font-size: 9px;
     font-weight: 300;
 }
 
 
-#moviePoster:hover #actions{
+#moviePoster:hover #actions {
     opacity: 1;
 }
 
-#actions{
+#actions {
     transition: 0.2s;
     opacity: 0;
     width: 100%;
@@ -196,24 +207,25 @@ img.castImage{
     outline: 1px solid var(--primary);
 }
 
-#actions ul{
-    display:block;
-    position: absolute;
-    bottom: 25%;
-    width: 100%;
-}
-#actions li{
-    transition: 0.2s;
-    margin-bottom: 35px;
-    padding: 25px 0px;
-    font-size: 32px;
-    font-weight: 300;
-}
+    #actions ul {
+        display: block;
+        position: absolute;
+        bottom: 25%;
+        width: 100%;
+    }
 
-#actions li:hover{
-    cursor: pointer;
-    background-color: #ffffffdc;
-    color:black;
-    font-weight: 600;
-    transform:translateY(-8px);
-}
+    #actions li {
+        transition: 0.2s;
+        margin-bottom: 35px;
+        padding: 25px 0px;
+        font-size: 32px;
+        font-weight: 300;
+    }
+
+        #actions li:hover {
+            cursor: pointer;
+            background-color: #ffffffdc;
+            color: black;
+            font-weight: 600;
+            transform: translateY(-8px);
+        }

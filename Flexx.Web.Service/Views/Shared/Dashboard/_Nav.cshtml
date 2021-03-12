@@ -7,7 +7,7 @@
 @if (!SignInManager.IsSignedIn(User))
 {
     <script>
-        window.location.href = "@Url.Action("Index", "Welcome")";
+        window.location.href = "@Url.Action("Index", "Welcome")"
     </script>
 }
 else
@@ -25,7 +25,7 @@ else
                     <div class="navItem">TV Shows</div>
                 </li>
                 <li>
-                    <div class="navItem">Movies</div>
+                    <div class="navItem" onclick="window.location.href='@Url.Action("Movies", "Dashboard")'">Movies</div>
                 </li>
                 <li>
                     <div class="navItem">Discover</div>
@@ -41,7 +41,7 @@ else
                             <div class="submenuBody">
                                 <ul>
                                     <li><div>Profile</div></li>
-                                    <li><div onclick="document.getElementById('logoutForm').submit();">Logout</div></li>
+                                    <li><div onclick="document.getElementById('logoutForm').submit()">Logout</div></li>
                                 </ul>
                             </div>
                         </div>

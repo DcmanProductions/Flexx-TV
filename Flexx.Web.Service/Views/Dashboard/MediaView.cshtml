@@ -1,13 +1,22 @@
 ﻿@model com.drewchaseproject.net.Flexx.Media.Libraries.Movies.MovieModel
 @{
-    ViewData["Title"] = "View";
+    ViewData["Title"] = Model.Title;
 }
+
 <link rel="stylesheet" href="/css/main.css">
 @Html.PartialAsync("Dashboard/_Nav").Result
 <link rel="stylesheet" href="~/css/movieView.css" />
 <link rel="stylesheet" href="~/css/dashboard.css" />
+<style>
+    body{
+        background: url(@Model.CoverURL);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
 <div id="movie">
-    <div id="moviePoster">
+    <div id="moviePoster" style="background: url( @Model.PosterURL );background-repeat: no-repeat;background-size: cover;">
         <div id="actions">
             <ul class="center">
                 <li>
@@ -24,9 +33,9 @@
     </div>
     <div id="overview">
         <div class="shadowed-bg"></div>
-        <div id="movieTitle">Outside the Wire</div>
+        <div id="movieTitle">@Model.Title</div>
         <div id="movieTitleSeperator"></div>
-        <div id="movieSummery">In the near future, a drone pilot is sent into a deadly militarized zone and must work with an android officer to locate a doomsday device.</div>
+        <div id="movieSummery">@Model.Summery</div>
         <div id="movieExecutives">
 
             <div id="movieExecutivesSeperator"></div>
@@ -66,35 +75,35 @@
             <ul>
                 <li>
                     <div class="castCard">
-                        <img class="castImage"></img>
+                        <img class="castImage" />
                         <div class="actorName">Anthony Mackie</div>
                         <div class="actorRole">Leo</div>
                     </div>
                 </li>
                 <li>
                     <div class="castCard">
-                        <img class="castImage"></img>
+                        <img class="castImage" />
                         <div class="actorName">Anthony Mackie</div>
                         <div class="actorRole">Leo</div>
                     </div>
                 </li>
                 <li>
                     <div class="castCard">
-                        <img class="castImage"></img>
+                        <img class="castImage" />
                         <div class="actorName">Anthony Mackie</div>
                         <div class="actorRole">Leo</div>
                     </div>
                 </li>
                 <li>
                     <div class="castCard">
-                        <img class="castImage"></img>
+                        <img class="castImage" />
                         <div class="actorName">Anthony Mackie</div>
                         <div class="actorRole">Leo</div>
                     </div>
                 </li>
                 <li>
                     <div class="castCard">
-                        <img class="castImage"></img>
+                        <img class="castImage" />
                         <div class="actorName">Anthony Mackie</div>
                         <div class="actorRole">Leo</div>
                     </div>
@@ -102,3 +111,4 @@
             </ul>
         </div>
     </div>
+</div>
