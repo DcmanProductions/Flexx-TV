@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.IO;
-using VikingErik.Mvc.ResumingActionResults;
 namespace com.drewchaseproject.net.Flexx.Web.Service.Controllers
 {
     public class StreamController : Controller
