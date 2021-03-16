@@ -73,7 +73,7 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
         /// <summary>
         /// Checks if <seealso cref="SMDFile"/> Exists
         /// </summary>
-        public bool HasSMD => System.IO.File.Exists($"{Title}.smd");
+        public bool HasSMD => System.IO.File.Exists(System.IO.Path.Combine(Directory.GetParent(Path).FullName, $"{Values.GetDirectoryFriendlyString(Title + "")}.smb"));
         /// <summary>
         /// Standard Media Data File Path.<br />
         /// Returns <seealso cref="GenerateDetails()"/>
@@ -87,7 +87,10 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
             get
             {
                 if (_fullCrew == null)
+                {
                     _fullCrew = new CastMembers(this);
+                }
+
                 return _fullCrew;
             }
         }
@@ -99,7 +102,10 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
             get
             {
                 if (_actors == null)
+                {
                     _actors = FullCrew.GetCrewByDepartment("Acting");
+                }
+
                 return _actors;
             }
         }
@@ -112,7 +118,10 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
             get
             {
                 if (_writers == null)
+                {
                     _writers = FullCrew.GetCrewByDepartment("Writing");
+                }
+
                 return _writers;
             }
         }
@@ -125,7 +134,10 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
             get
             {
                 if (_directors == null)
+                {
                     _directors = FullCrew.GetCrewByDepartment("Directing");
+                }
+
                 return _directors;
             }
         }
@@ -135,6 +147,7 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
         private CastMembers _actors;
         private CastMembers _writers;
         private CastMembers _directors;
+        private string SMDPath => System.IO.Path.Combine(Directory.GetParent(Path).FullName, $"{Values.GetDirectoryFriendlyString(Title + "")}.smb");
         private string PosterPath
         {
             get
@@ -208,7 +221,7 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
         /// </summary>
         public void Organize()
         {
-            string formattedName = $"{Title} ({Year})";
+            string formattedName = Values.GetDirectoryFriendlyString($"{Title} ({Year})");
             string formattedName_Ext = $"{formattedName}{Extension}";
             string movieFolder = System.IO.Path.Combine(Library.Path, formattedName);
             string newPath = Directory.GetParent(Path).FullName.Equals(formattedName) ? Path : System.IO.Path.Combine(movieFolder, formattedName_Ext);
@@ -227,7 +240,7 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
         #region Private
         private ConfigManager RetrieveSMD()
         {
-            ConfigManager smd = new ConfigManager(System.IO.Path.Combine(Directory.GetParent(Path).FullName, $"{Title}.smb"));
+            ConfigManager smd = new ConfigManager(SMDPath);
             TMDBID = smd.GetConfigByKey("TMDBID").ParseInt();
             Title = smd.GetConfigByKey("Title").Value;
             Year = short.Parse(smd.GetConfigByKey("Year").Value);
@@ -240,7 +253,7 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
         {
             SetDataBasedOnJSONResponse();
             Organize();
-            ConfigManager smd = new ConfigManager(System.IO.Path.Combine(Directory.GetParent(Path).FullName, $"{Title}.smb"));
+            ConfigManager smd = new ConfigManager(SMDPath);
             // Adds items to the SMD File
             smd.Add("TMDBID", TMDBID.ToString());
             smd.Add("Title", Title);

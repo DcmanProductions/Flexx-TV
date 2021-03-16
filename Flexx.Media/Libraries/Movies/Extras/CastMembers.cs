@@ -1,9 +1,6 @@
 ﻿using com.drewchaseproject.net.Flexx.Core.Data;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static com.drewchaseproject.net.Flexx.Media.Libraries.Movies.Extras.CastMember;
 
 namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies.Extras
@@ -29,14 +26,17 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies.Extras
             List<CastMember> temp = new List<CastMember>();
             ForEach(item =>
             {
-                if (item.Department.ToLower().Equals(department.ToLower())) temp.Add(item);
+                if (item.Department.ToLower().Equals(department.ToLower()))
+                {
+                    temp.Add(item);
+                }
             });
             return new CastMembers(temp);
         }
 
         private void GenerateCastMembers(string response)
         {
-            var obj = JSON.ParseJson(response)["cast"];
+            Newtonsoft.Json.Linq.JToken obj = JSON.ParseJson(response)["cast"];
             for (int i = 0; i < obj.Count(); i++)
             {
                 string name = obj[i]["name"].ToString();

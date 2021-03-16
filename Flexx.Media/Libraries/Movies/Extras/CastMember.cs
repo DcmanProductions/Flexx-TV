@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies.Extras
+﻿namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies.Extras
 {
     public class CastMember
     {
