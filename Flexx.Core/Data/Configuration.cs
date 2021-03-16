@@ -25,7 +25,7 @@ namespace com.drewchaseproject.net.Flexx.Core.Data
         public static void Init()
         {
             manager = new ConfigManager(Values.ApplicationSettingFile);
-            manager.Add("web_port", "89715");
+            manager.Add("web_port", "2112");
             manager.Add("libraries", Path.Combine(Values.ConfigDirectory, "libraries.manifest"));
         }
     }
