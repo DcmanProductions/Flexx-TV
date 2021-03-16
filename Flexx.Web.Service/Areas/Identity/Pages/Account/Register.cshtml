@@ -8,7 +8,7 @@
 <div class="shadowed-bg page-overlay"></div>
 @Html.PartialAsync("Welcome/_Nav").Result
 <div class="center">
-    <div id="LoginForm">
+    <div id="SignUpForm" class="LoginForm">
         <header>Sign Up</header>
         <div asp-validation-summary="All" class="text-danger"></div>
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
@@ -23,6 +23,10 @@
             <div class="field">
                 <input type="password" asp-for="Input.ConfirmPassword" placeholder="Confirm Password" required>
                 <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+            </div>
+            <div class="field">
+                <input type="text" asp-for="Input.TOKEN" placeholder="TOKEN" required>
+                <label asp-for="Input.TOKEN">TOKEN</label>
             </div>
             <button id="submit-btn" class="btn" type="submit">Sign Up</button>
         </form>

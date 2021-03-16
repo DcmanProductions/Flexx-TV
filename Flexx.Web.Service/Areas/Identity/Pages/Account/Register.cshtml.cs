@@ -59,6 +59,9 @@ namespace com.drewchaseproject.net.Flexx.Web.Service.Areas.Identity.Pages.Accoun
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+            [DataType(DataType.Text)]
+            [Display(Name = "TOKEN")]
+            public string TOKEN { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
