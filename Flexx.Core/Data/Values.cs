@@ -85,7 +85,15 @@ namespace com.drewchaseproject.net.Flexx.Core.Data
         #endregion
         #endregion
         #region Functions
-        
+        public static string GetDirectoryFriendlyString(string input)
+        {
+            char[] illigal = "<>:\"\\/|?*".ToCharArray();
+            foreach (char c in illigal)
+            {
+                input = input.Replace(c + "", "");
+            }
+            return input;
+        }
         #endregion
 
     }
