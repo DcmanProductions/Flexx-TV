@@ -1,0 +1,38 @@
+﻿@model com.drewchaseproject.net.Flexx.Media.Libraries.Movies.MovieModel
+
+@{
+    ViewData["Title"] = $"Playing {Model.Title}";
+}
+@using Microsoft.AspNetCore.Identity
+@using com.drewchaseproject.net.Flexx.Web.Service.Areas.Identity.Data
+@inject SignInManager<FlexxUser> SignInManager
+@inject UserManager<FlexxUser> UserManager
+
+@if (!SignInManager.IsSignedIn(User))
+{
+    <script>
+        window.location.href = "@Url.Action("Index", "Welcome")"
+    </script>
+}
+else
+{
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="~/css/movieView.css" />
+    <link rel="stylesheet" href="~/css/Media.css" />
+    <link rel="stylesheet" href="/css/plyr.css" />
+    <link rel="stylesheet" href="/css/videoplayer.css">
+    <div id="videoView">
+        <div id="exitBtn" onclick="window.location.href = '/Media/Movies/@Model.Title'">X</div>
+        <div class="container">
+            <video controls data-plyr="pip" src="/api/streaming/@Model.Library.Name/@Model.Title/direct/0"></video>
+        </div>
+        <script src="/js/plyr.js"></script>
+        <script src="/js/videoplayer.js"></script>
+    </div>
+
+    <script>
+    player.on("ended", event => {
+        window.location.href = '/Media/Movies/@Model.Title';
+    });
+    </script>
+}

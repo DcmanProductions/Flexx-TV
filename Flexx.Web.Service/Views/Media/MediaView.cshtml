@@ -4,9 +4,12 @@
 }
 
 <link rel="stylesheet" href="/css/main.css">
-@Html.PartialAsync("Dashboard/_Nav").Result
+@Html.PartialAsync("Media/_Nav").Result
 <link rel="stylesheet" href="~/css/movieView.css" />
-<link rel="stylesheet" href="~/css/dashboard.css" />
+<link rel="stylesheet" href="~/css/Media.css" />
+<script>
+    changeActiveNavItem(-1);
+</script>
 <style>
     body{
         background: url(@Model.CoverURL);
@@ -20,10 +23,10 @@
         <div id="actions">
             <ul class="center">
                 <li>
-                    <div id="playBtn"  onclick="alert('Not Ready Yet')">Play</div>
+                    <div id="playBtn"  onclick="window.location.href = '/Media/Movies/@Model.Title/Watch'">Play</div>
                 </li>
                 <li>
-                    <div id="trailerBtn" onclick="window.location.href = '/Movies/@Model.Title/Trailer'">Trailer</div>
+                    <div id="trailerBtn" onclick="window.location.href = '/Media/Movies/@Model.Title/Trailer'">Trailer</div>
                 </li>
             </ul>
         </div>

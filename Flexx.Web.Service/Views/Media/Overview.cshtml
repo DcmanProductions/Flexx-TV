@@ -2,10 +2,13 @@
     ViewData["Title"] = "Overview";
 }
 <link rel="stylesheet" href="/css/main.css">
-<link rel="stylesheet" href="/css/dashboard.css">
-@Html.PartialAsync("Dashboard/_Nav").Result
+<link rel="stylesheet" href="/css/Media.css">
+@Html.PartialAsync("Media/_Nav").Result
+<script>
+    changeActiveNavItem(0);
+</script>
 <div class="shadowed-bg page-overlay"></div>
-<div class="dashboard">
+<div class="Media">
     <div class="itemCarosel">
         <div class="caroselTitle">Continue Watching</div>
         <div class="caroselSeperator"></div>
@@ -126,7 +129,7 @@
 <script>
         Array.from(document.getElementsByClassName('mediaItem')).forEach(item=>{
             item.addEventListener('click', e => {
-                window.location.href = '@Url.Action("MediaView", "Dashboard", "Outside the Wire")'
+                window.location.href = '@Url.Action("MediaView", "Media", "Outside the Wire")'
             })
         })
 </script>

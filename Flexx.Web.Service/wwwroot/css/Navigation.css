@@ -103,7 +103,7 @@
     padding: 10px 0px;
     position: absolute;
     width: 100%;
-    margin-top: 1px;
+    margin-top: 0px;
 }
 
 .submenu:hover .submenuBody {

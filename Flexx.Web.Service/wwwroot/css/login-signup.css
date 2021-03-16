@@ -5,8 +5,8 @@ body{
     color: white;
 }
 
-#LoginForm{
-    z-index: 10;
+.LoginForm {
+    z-index: 100;
     width: 437px;
     justify-self: center;
     text-align: center;
@@ -14,7 +14,11 @@ body{
     padding: 25px;
 }
 
-#LoginForm header{
+#SignUpForm {
+    margin-top: -125px;
+}
+
+.LoginForm header{
     font-size: 70px;
     font-weight: 400;
     margin-top: 25px;

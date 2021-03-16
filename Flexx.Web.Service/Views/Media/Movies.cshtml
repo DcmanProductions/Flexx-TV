@@ -2,10 +2,10 @@
     ViewData["Title"] = "Movies";
 }
 <link rel="stylesheet" href="/css/main.css">
-<link rel="stylesheet" href="/css/dashboard.css">
-@Html.PartialAsync("Dashboard/_Nav").Result
+<link rel="stylesheet" href="/css/Media.css">
+@Html.PartialAsync("Media/_Nav").Result
 <div class="shadowed-bg page-overlay"></div>
-<div class="dashboard">
+<div class="Media">
     <div class="itemCarosel">
         <div class="caroselTitle">Movies</div>
         <div class="caroselSeperator"></div>
@@ -13,7 +13,7 @@
             @foreach (var movie in com.drewchaseproject.net.Flexx.Media.Libraries.LibraryListModel.Singleton.GetByName("movies").Movies)
             {
                 <li>
-                    <div class="mediaItem" onmouseover="document.querySelector('body').style.background = 'url(@movie.CoverURL)'" onclick="window.location.href = '/Movies/@movie.Title'">
+                    <div class="mediaItem" onmouseover="document.querySelector('body').style.background = 'url(@movie.CoverURL)'" onclick="window.location.href = '/Media/Movies/@movie.Title'">
                         <img src="@movie.PosterURL" />
                     </div>
                 </li>
@@ -22,6 +22,7 @@
     </div>
 </div>
 <script>
+    changeActiveNavItem(2);
     document.querySelector('body').style.background = 'url(@com.drewchaseproject.net.Flexx.Media.Libraries.LibraryListModel.Singleton.GetByName("movies").Movies[0].CoverURL)'
     document.querySelector('body').style.backgroundRepeat = "no-repeat"
     document.querySelector('body').style.backgroundSize = "cover"
