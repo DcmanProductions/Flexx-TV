@@ -18,12 +18,13 @@
         background-size: cover;
     }
 </style>
+<div id="overlay" class="shadowed-bg"></div>
 <div id="movie">
     <div id="moviePoster" style="background: url( @Model.PosterURL );background-repeat: no-repeat;background-size: cover;">
         <div id="actions">
             <ul class="center">
                 <li>
-                    <div id="playBtn"  onclick="window.location.href = '/Media/Movies/@Model.Title/Watch'">Play</div>
+                    <div id="playBtn" onclick="window.location.href = '/Media/Movies/@Model.Title/Watch'">Play</div>
                 </li>
                 <li>
                     <div id="trailerBtn" onclick="window.location.href = '/Media/Movies/@Model.Title/Trailer'">Trailer</div>
@@ -46,7 +47,7 @@
                 </li>
                 @for (int i = 0; i < Model.Writers.Count(); i++)
                 {
-                    if (i >= 3) return;
+                    if (i >= 3) break;
                     <li>
                         <div class="executiveTitle">Writer</div>
                         <div class="executiveName">@Model.Writers[i].ActorName</div>
@@ -55,15 +56,24 @@
             </ul>
         </div>
         <div id="movieStats">
-            <div id="length">1h 56m</div>
-            <div id="rating">Rated R</div><br>
-            <div id="language">English</div>
-            <div id="resolution">1080p</div><br>
+            <div id="length">@Model.MediaDetails.Duration</div>
+            <div id="rating">@Model.MPAARating</div><br>
+            <div id="language">@Model.Language</div>
+            <div id="resolution">@Model.MediaDetails.Resolution.Display</div><br>
             <div id="genres">
                 <ul>
-                    <li>Thriller,</li>
-                    <li>Action,</li>
-                    <li>Science Fiction</li>
+                    @for (int i = 0; i < Model.Genres.Count; i++)
+                    {
+                        if (i >= 4) break;
+                        if (i == Model.Genres.Count - 1 || i == 3)
+                        {
+                            <li>@Model.Genres[i]</li>
+                        }
+                        else
+                        {
+                            <li>@Model.Genres[i] ,</li>
+                        }
+                    }
                 </ul>
             </div>
         </div>
@@ -71,7 +81,7 @@
             <ul>
                 @for (int i = 0; i < Model.Actors.Count(); i++)
                 {
-                    if (i >= 5) return;
+                    if (i >= 5) break;
 
                     <li>
                         <div class="castCard">

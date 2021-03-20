@@ -24,7 +24,7 @@ else
     <div id="videoView">
         <div id="exitBtn" onclick="window.location.href = '/Media/Movies/@Model.Title'">X</div>
         <div class="container">
-            <video controls data-plyr="pip" src="/api/streaming/@Model.Library.Name/@Model.Title/direct/0"></video>
+            <video controls data-plyr="pip" src="/api/streaming/@Model.Library.Name/@Model.Title/direct"></video>
         </div>
         <script src="/js/plyr.js"></script>
         <script src="/js/videoplayer.js"></script>
@@ -34,5 +34,8 @@ else
     player.on("ended", event => {
         window.location.href = '/Media/Movies/@Model.Title';
     });
+        player.on("seeked", e => {
+           
+        })
     </script>
 }

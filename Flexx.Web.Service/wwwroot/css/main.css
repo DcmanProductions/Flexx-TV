@@ -108,3 +108,12 @@ ul {
     outline: 2px solid white;
     width: 0px;
 }
+
+#overlay {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: .5;
+}

@@ -1,5 +1,6 @@
 using com.drewchaseproject.net.Flexx.Core.Data;
 using com.drewchaseproject.net.Flexx.Media.Libraries;
+using com.drewchaseproject.net.Flexx.Media.Libraries.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using System.IO;
@@ -11,6 +12,7 @@ namespace com.drewchaseproject.net.Flexx.Web.Service
         public static void Main(string[] args)
         {
             Configuration.Init();
+            _ = Transcoding.Singleton;
             LibraryListModel.Singleton.CreateLibrary("movies", Path.Combine(Values.RootDirectory, "media"), Values.LibraryType.Movies);
             try
             {

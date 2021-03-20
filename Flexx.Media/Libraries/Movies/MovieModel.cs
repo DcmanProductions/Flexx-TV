@@ -1,8 +1,11 @@
 ﻿using ChaseLabs.CLConfiguration.List;
 using com.drewchaseproject.net.Flexx.Core.Data;
+using com.drewchaseproject.net.Flexx.Media.Libraries.Data;
 using com.drewchaseproject.net.Flexx.Media.Libraries.Movies.Extras;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using TorrentTitleParser;
 
@@ -27,14 +30,18 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
         /// The Movie Database ID
         /// </summary>
         public int TMDBID { get; private set; }
+        public string Language { get; private set; }
         /// <summary>
         /// The Movie summery or synopsis.
         /// </summary>
         public string Summery { get; private set; }
+        public VideoInformation MediaDetails { get; private set; }
+        public string MPAARating { get; private set; }
         /// <summary>
         /// A Direct URL to the Poster Image
         /// </summary>
         public string PosterURL { get; private set; }
+        public List<string> Genres { get; private set; }
         /// <summary>
         /// A Direct URL to the Cover Image
         /// </summary>
@@ -211,6 +218,8 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
                     smd = CreateSMD();
                 }
             }
+            InitWatcher();
+            MediaDetails = new VideoInformation(Path);
             return smd.PATH;
         }
 
@@ -238,11 +247,30 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
         }
         #endregion
         #region Private
+        private void InitWatcher()
+        {
+            FileSystemWatcher fsw = new FileSystemWatcher
+            {
+                Path = Directory.GetParent(Path).FullName,
+                NotifyFilter = NotifyFilters.FileName | NotifyFilters.DirectoryName,
+                Filter = "*.*"
+            };
+            fsw.Renamed += Refresh;
+            fsw.EnableRaisingEvents = true;
+        }
+
+        private void Refresh(object Sender, RenamedEventArgs args)
+        {
+            System.Console.WriteLine("HELLO FROM RENAMED");
+            Path = args.FullPath;
+            GenerateDetails(true);
+        }
         private ConfigManager RetrieveSMD()
         {
             ConfigManager smd = new ConfigManager(SMDPath);
             TMDBID = smd.GetConfigByKey("TMDBID").ParseInt();
             Title = smd.GetConfigByKey("Title").Value;
+            Language = smd.GetConfigByKey("Language").Value;
             Year = short.Parse(smd.GetConfigByKey("Year").Value);
             Summery = smd.GetConfigByKey("Summery").Value;
             CoverURL = smd.GetConfigByKey("Cover").Value;
@@ -257,6 +285,7 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
             // Adds items to the SMD File
             smd.Add("TMDBID", TMDBID.ToString());
             smd.Add("Title", Title);
+            smd.Add("Language", Language);
             smd.Add("Year", Year.ToString());
             smd.Add("Summery", Summery);
             smd.Add("Cover", CoverURL);
@@ -275,8 +304,8 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
 
         private void DownloadAssets()
         {
-            DownloadPoster();
-            DownloadCover();
+            //DownloadPoster();
+            //DownloadCover();
         }
 
         private void DownloadPoster()
@@ -310,21 +339,70 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
         /// </summary>
         private void SetDataBasedOnJSONResponse()
         {
-            JToken obj;
+            JToken obj = null;
             try
             {
                 obj = JSON.ParseJson(GetJsonResponse(GetTitleFromTorrentData()))["results"][0];
             }
             catch
             {
-                obj = JSON.ParseJson(GetJsonResponse(GetTitleFromTorrentData(false)))["results"][0];
+                try
+                {
+
+                    obj = JSON.ParseJson(GetJsonResponse(GetTitleFromTorrentData(false)))["results"][0];
+                }
+                catch
+                {
+                    obj = null;
+                }
             }
-            Title = obj["original_title"].ToString();
-            Summery = obj["overview"].ToString();
-            CoverURL = $"http://image.tmdb.org/t/p/original{obj["backdrop_path"]}";
-            PosterURL = $"http://image.tmdb.org/t/p/original{obj["poster_path"]}";
-            TMDBID = int.Parse(obj["id"].ToString());
-            Year = short.TryParse(obj["release_date"].ToString().Split('-')[0].Replace("-", ""), out short _year) ? _year : 0000;
+            if (obj == null)
+            {
+                Title = File;
+                Summery = "No Information Found about this Movie!";
+                CoverURL = "";
+                PosterURL = "";
+                TMDBID = 0;
+                Year = 0000;
+            }
+            else
+            {
+                Title = obj["original_title"].ToString();
+                Language = Languages.GetByAbbreviation(obj["original_language"].ToString()).Name;
+                Summery = obj["overview"].ToString();
+                CoverURL = $"http://image.tmdb.org/t/p/original{obj["backdrop_path"]}";
+                PosterURL = $"http://image.tmdb.org/t/p/original{obj["poster_path"]}";
+                TMDBID = int.Parse(obj["id"].ToString());
+                Year = (short)(short.TryParse(obj["release_date"].ToString().Split('-')[0].Replace("-", ""), out short _year) ? _year : 0000);
+
+                obj["genre_ids"].ToList().ForEach(item =>
+                {
+                    string name = Data.Genres.GetByID(int.Parse(item + "")).Name;
+                    if (Genres == null) Genres = new List<string>();
+                    Genres.Add(name);
+                });
+
+                using (WebClient client = new WebClient())
+                {
+                    string response = client.DownloadString($"https://api.themoviedb.org/3/movie/{TMDBID}/release_dates?api_key={Values.TheMovieDBAPIKey}");
+                    obj = JSON.ParseJson(response)["results"];
+                    MPAARating = "UNKNOWN";
+                    foreach (var child in obj.Children().ToList())
+                    {
+                        try
+                        {
+                            if (child["iso_3166_1"].ToString().ToLower().Equals("us"))
+                            {
+                                MPAARating = child["release_dates"][0]["certification"].ToString();
+                            }
+                        }
+                        catch
+                        {
+                            continue;
+                        }
+                    }
+                }
+            }
         }
 
 

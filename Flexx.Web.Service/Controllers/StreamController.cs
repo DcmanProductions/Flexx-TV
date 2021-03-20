@@ -8,15 +8,14 @@ namespace com.drewchaseproject.net.Flexx.Web.Service.Controllers
         {
             return RedirectToAction("Overview", "Media");
         }
-        [Route("/api/streaming/{library}/{movie}/direct/{start}")]
-        public IActionResult GetFile(string movie, string library, long start = 0)
+        [Route("/api/streaming/{library}/{movie}/direct")]
+        public IActionResult GetFile(string movie, string library)
         {
             string path = Media.Libraries.LibraryListModel.Singleton.GetByName(library).Movies.GetByName(movie).Path;
             FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
-            //stream.Seek(1024, SeekOrigin.Begin);
-            //ResumingFileStreamResult fsr = new ResumingFileStreamResult(stream, "video/mp4");
-            return File(stream, "video/mp4");
-            //return File(bytes, "video/mp4", path);
+            var file = File(stream, "video/mp4");
+            file.EnableRangeProcessing = true;
+            return file;
         }
     }
 }
