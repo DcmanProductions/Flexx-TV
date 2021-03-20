@@ -37,5 +37,11 @@ namespace com.drewchaseproject.net.Flexx.Web.Service.Controllers
             return View(movie);
         }
 
+        public IActionResult Series()
+        {
+            return View();
+        }
+
+
     }
 }
