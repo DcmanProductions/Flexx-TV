@@ -10,8 +10,8 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DebugType>none</DebugType>
-    <DebugSymbols>false</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
   <ItemGroup>
@@ -42,6 +42,10 @@
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="if $(ConfigurationName) == Release (powershell Compress-Archive -Path  '$(TargetDir)*' -DestinationPath '$(SolutionDir)$(SolutionName).zip' -Force)" />
+  </Target>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="if $(ConfigurationName) == Release (xcopy &quot;$(ProjectDir)wwwroot\*.*&quot; &quot;$(ProjectDir)$(OutDir)wwwroot&quot; /Y /I /E)" />
   </Target>
 
 </Project>
