@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace com.drewchaseproject.net.Flexx.Core.Data.Authentication
 {

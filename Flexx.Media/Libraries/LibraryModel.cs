@@ -47,5 +47,21 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries
                 // Do Tv Show Shit
             }
         }
+
+        private void Update()
+        {
+            System.Timers.Timer timer = new System.Timers.Timer(5000);
+            timer.Elapsed += (s, e) =>
+            {
+                Refresh();
+            };
+            timer.AutoReset = true;
+            timer.Enabled = true;
+        }
+
+        public void Refresh()
+        {
+
+        }
     }
 }

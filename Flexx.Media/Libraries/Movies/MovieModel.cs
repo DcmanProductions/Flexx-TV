@@ -378,7 +378,11 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
                 obj["genre_ids"].ToList().ForEach(item =>
                 {
                     string name = Data.Genres.GetByID(int.Parse(item + "")).Name;
-                    if (Genres == null) Genres = new List<string>();
+                    if (Genres == null)
+                    {
+                        Genres = new List<string>();
+                    }
+
                     Genres.Add(name);
                 });
 
@@ -387,7 +391,7 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies
                     string response = client.DownloadString($"https://api.themoviedb.org/3/movie/{TMDBID}/release_dates?api_key={Values.TheMovieDBAPIKey}");
                     obj = JSON.ParseJson(response)["results"];
                     MPAARating = "UNKNOWN";
-                    foreach (var child in obj.Children().ToList())
+                    foreach (JToken child in obj.Children().ToList())
                     {
                         try
                         {

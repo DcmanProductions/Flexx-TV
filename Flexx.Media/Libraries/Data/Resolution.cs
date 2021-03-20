@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace com.drewchaseproject.net.Flexx.Media.Libraries.Data
 {
@@ -51,7 +48,7 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Data
             }
         }
 
-        private int Width, Height;
+        private readonly int Width, Height;
         private IEnumerable<int> Widths => new List<int>
             {
                 10240,
@@ -194,8 +191,8 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Data
                 120,
                 800
             };
-        private IEnumerable<String> Names =>
-             new List<String>
+        private IEnumerable<string> Names =>
+             new List<string>
             {
                 "Ultra-Wide 10K (UW10K)",
                 "DCI 8K (8K Full Format)",
@@ -266,7 +263,7 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Data
                 "Quarter Quarter VGA (QQVGA)",
                 "1080p Widescreen"
             };
-        private IEnumerable<String> AspectRatios => new List<String>
+        private IEnumerable<string> AspectRatios => new List<string>
             {
                 "21∶9",
                 "1.90∶1",

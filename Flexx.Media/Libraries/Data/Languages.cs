@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace com.drewchaseproject.net.Flexx.Media.Libraries.Data
 {
@@ -11,277 +7,282 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Data
 
         public static Language GetByAbbreviation(string abbv)
         {
-            foreach(var lang in GetLanguages())
+            foreach (Language lang in GetLanguages())
             {
-                if (lang.Abbreviation.ToLower().Equals(abbv)) return lang;
+                if (lang.Abbreviation.ToLower().Equals(abbv))
+                {
+                    return lang;
+                }
             }
             return new Language(abbv, "Unkown");
         }
 
         private static List<Language> GetLanguages()
         {
-            List<Language> list = new List<Language>();
-            list.Add(new Language("bo", "Boro"));
-            list.Add(new Language("aa", "Afar"));
-            list.Add(new Language("ab", "Abkhazian"));
-            list.Add(new Language("af", "Afrikaans"));
-            list.Add(new Language("ak", "Akan"));
-            list.Add(new Language("als", "Alemannic"));
-            list.Add(new Language("am", "Amharic"));
-            list.Add(new Language("an", "Aragonese"));
-            list.Add(new Language("ang", "Angal"));
-            list.Add(new Language("ar", "Arabic"));
-            list.Add(new Language("arc", "Aramaic"));
-            list.Add(new Language("as", "Assamese"));
-            list.Add(new Language("ast", "Asturian"));
-            list.Add(new Language("av", "Avar"));
-            list.Add(new Language("awa", "Awadhi"));
-            list.Add(new Language("ay", "Aymara"));
-            list.Add(new Language("az", "Azerbaijani"));
-            list.Add(new Language("ba", "Bashkir"));
-            list.Add(new Language("bar", "Bavarian"));
-            list.Add(new Language("bat-smg", "Samogitian"));
-            list.Add(new Language("bcl", "Bikol"));
-            list.Add(new Language("be", "Belarusian"));
-            list.Add(new Language("bg", "Bulgarian"));
-            list.Add(new Language("bh", "Bihari"));
-            list.Add(new Language("bi", "Bislama"));
-            list.Add(new Language("bm", "Bambara"));
-            list.Add(new Language("bn", "Bengali"));
-            list.Add(new Language("bo", "Tibetan"));
-            list.Add(new Language("bpy", "Bishnupriya Manipuri"));
-            list.Add(new Language("br", "Breton"));
-            list.Add(new Language("bs", "Bosnian"));
-            list.Add(new Language("bug", "Buginese"));
-            list.Add(new Language("bxr", "Buriat (Russia)"));
-            list.Add(new Language("ca", "Catalan"));
-            list.Add(new Language("cdo", "Min Dong Chinese"));
-            list.Add(new Language("ce", "Chechen"));
-            list.Add(new Language("ceb", "Cebuano"));
-            list.Add(new Language("ch", "Chamorro"));
-            list.Add(new Language("cho", "Choctaw"));
-            list.Add(new Language("chr", "Cherokee"));
-            list.Add(new Language("chy", "Cheyenne"));
-            list.Add(new Language("co", "Corsican"));
-            list.Add(new Language("cr", "Cree"));
-            list.Add(new Language("cs", "Czech"));
-            list.Add(new Language("csb", "Kashubian"));
-            list.Add(new Language("cu", "Old Church Slavonic"));
-            list.Add(new Language("cv", "Chuvash"));
-            list.Add(new Language("cy", "Welsh"));
-            list.Add(new Language("da", "Danish"));
-            list.Add(new Language("de", "German"));
-            list.Add(new Language("diq", "Dimli"));
-            list.Add(new Language("dsb", "Lower Sorbian"));
-            list.Add(new Language("dv", "Divehi"));
-            list.Add(new Language("dz", "Dzongkha"));
-            list.Add(new Language("ee", "Ewe"));
-            list.Add(new Language("el", "Greek"));
-            list.Add(new Language("en", "English"));
-            list.Add(new Language("eo", "Esperanto"));
-            list.Add(new Language("es", "Spanish"));
-            list.Add(new Language("et", "Estonian"));
-            list.Add(new Language("eu", "Basque"));
-            list.Add(new Language("ext", "Extremaduran"));
-            list.Add(new Language("fa", "Persian"));
-            list.Add(new Language("ff", "Peul"));
-            list.Add(new Language("fi", "Finnish"));
-            list.Add(new Language("fiu-vro", "Võro"));
-            list.Add(new Language("fj", "Fijian"));
-            list.Add(new Language("fo", "Faroese"));
-            list.Add(new Language("fr", "French"));
-            list.Add(new Language("frp", "Arpitan"));
-            list.Add(new Language("fur", "Friulian"));
-            list.Add(new Language("fy", "West Frisian"));
-            list.Add(new Language("ga", "Irish"));
-            list.Add(new Language("gan", "Gan Chinese"));
-            list.Add(new Language("gbm", "Garhwali"));
-            list.Add(new Language("gd", "Scottish Gaelic"));
-            list.Add(new Language("gil", "Gilbertese"));
-            list.Add(new Language("gl", "Galician"));
-            list.Add(new Language("gn", "Guarani"));
-            list.Add(new Language("got", "Gothic"));
-            list.Add(new Language("gu", "Gujarati"));
-            list.Add(new Language("gv", "Manx"));
-            list.Add(new Language("ha", "Hausa"));
-            list.Add(new Language("hak", "Hakka Chinese"));
-            list.Add(new Language("haw", "Hawaiian"));
-            list.Add(new Language("he", "Hebrew"));
-            list.Add(new Language("hi", "Hindi"));
-            list.Add(new Language("ho", "Hiri Motu"));
-            list.Add(new Language("hr", "Croatian"));
-            list.Add(new Language("ht", "Haitian"));
-            list.Add(new Language("hu", "Hungarian"));
-            list.Add(new Language("hy", "Armenian"));
-            list.Add(new Language("hz", "Herero"));
-            list.Add(new Language("ia", "Interlingua"));
-            list.Add(new Language("id", "Indonesian"));
-            list.Add(new Language("ie", "Interlingue"));
-            list.Add(new Language("ig", "Igbo"));
-            list.Add(new Language("ii", "Sichuan Yi"));
-            list.Add(new Language("ik", "Inupiak"));
-            list.Add(new Language("ilo", "Ilokano"));
-            list.Add(new Language("inh", "Ingush"));
-            list.Add(new Language("io", "Ido"));
-            list.Add(new Language("is", "Icelandic"));
-            list.Add(new Language("it", "Italian"));
-            list.Add(new Language("iu", "Inuktitut"));
-            list.Add(new Language("ja", "Japanese"));
-            list.Add(new Language("jbo", "Lojban"));
-            list.Add(new Language("jv", "Javanese"));
-            list.Add(new Language("ka", "Georgian"));
-            list.Add(new Language("kg", "Kongo"));
-            list.Add(new Language("ki", "Kikuyu"));
-            list.Add(new Language("kj", "Kuanyama"));
-            list.Add(new Language("kk", "Kazakh"));
-            list.Add(new Language("kl", "Greenlandic"));
-            list.Add(new Language("km", "Cambodian"));
-            list.Add(new Language("kn", "Kannada"));
-            list.Add(new Language("khw", "Khowar"));
-            list.Add(new Language("ko", "Korean"));
-            list.Add(new Language("kr", "Kanuri"));
-            list.Add(new Language("ks", "Kashmiri"));
-            list.Add(new Language("ksh", "Ripuarian"));
-            list.Add(new Language("ku", "Kurdish"));
-            list.Add(new Language("kv", "Komi"));
-            list.Add(new Language("kw", "Cornish"));
-            list.Add(new Language("ky", "Kirghiz"));
-            list.Add(new Language("la", "Latin"));
-            list.Add(new Language("lad", "Ladino"));
-            list.Add(new Language("lan", "Lango"));
-            list.Add(new Language("lb", "Luxembourgish"));
-            list.Add(new Language("lg", "Ganda"));
-            list.Add(new Language("li", "Limburgian"));
-            list.Add(new Language("lij", "Ligurian"));
-            list.Add(new Language("lmo", "Lombard"));
-            list.Add(new Language("ln", "Lingala"));
-            list.Add(new Language("lo", "Laotian"));
-            list.Add(new Language("lzz", "Laz"));
-            list.Add(new Language("lt", "Lithuanian"));
-            list.Add(new Language("lv", "Latvian"));
-            list.Add(new Language("map-bms", "Banyumasan"));
-            list.Add(new Language("mg", "Malagasy"));
-            list.Add(new Language("man", "Mandarin"));
-            list.Add(new Language("mh", "Marshallese"));
-            list.Add(new Language("mi", "Maori"));
-            list.Add(new Language("min", "Minangkabau"));
-            list.Add(new Language("mk", "Macedonian"));
-            list.Add(new Language("ml", "Malayalam"));
-            list.Add(new Language("mn", "Mongolian"));
-            list.Add(new Language("mo", "Moldovan"));
-            list.Add(new Language("mr", "Marathi"));
-            list.Add(new Language("mrh", "Mara"));
-            list.Add(new Language("ms", "Malay"));
-            list.Add(new Language("mt", "Maltese"));
-            list.Add(new Language("mus", "Creek"));
-            list.Add(new Language("mwl", "Mirandese"));
-            list.Add(new Language("my", "Burmese"));
-            list.Add(new Language("na", "Nauruan"));
-            list.Add(new Language("nah", "Nahuatl"));
-            list.Add(new Language("nap", "Neapolitan"));
-            list.Add(new Language("nd", "North Ndebele"));
-            list.Add(new Language("nds", "Low German"));
-            list.Add(new Language("nds-nl", "Dutch Low Saxon"));
-            list.Add(new Language("ne", "Nepali"));
-            list.Add(new Language("new", "Newar"));
-            list.Add(new Language("ng", "Ndonga"));
-            list.Add(new Language("nl", "Dutch"));
-            list.Add(new Language("nn", "Norwegian Nynorsk"));
-            list.Add(new Language("no", "Norwegian"));
-            list.Add(new Language("nr", "South Ndebele"));
-            list.Add(new Language("nso", "Northern Sotho"));
-            list.Add(new Language("nrm", "Norman"));
-            list.Add(new Language("nv", "Navajo"));
-            list.Add(new Language("ny", "Chichewa"));
-            list.Add(new Language("oc", "Occitan"));
-            list.Add(new Language("oj", "Ojibwa"));
-            list.Add(new Language("om", "Oromo"));
-            list.Add(new Language("or", "Oriya"));
-            list.Add(new Language("os", "Ossetian"));
-            list.Add(new Language("pa", "Panjabi"));
-            list.Add(new Language("pag", "Pangasinan"));
-            list.Add(new Language("pam", "Kapampangan"));
-            list.Add(new Language("pap", "Papiamentu"));
-            list.Add(new Language("pdc", "Pennsylvania German"));
-            list.Add(new Language("pi", "Pali"));
-            list.Add(new Language("pih", "Norfolk"));
-            list.Add(new Language("pl", "Polish"));
-            list.Add(new Language("pms", "Piedmontese"));
-            list.Add(new Language("ps", "Pashto"));
-            list.Add(new Language("pt", "Portuguese"));
-            list.Add(new Language("qu", "Quechua"));
-            list.Add(new Language("rm", "Raeto Romance"));
-            list.Add(new Language("rmy", "Romani"));
-            list.Add(new Language("rn", "Kirundi"));
-            list.Add(new Language("ro", "Romanian"));
-            list.Add(new Language("roa-rup", "Aromanian"));
-            list.Add(new Language("ru", "Russian"));
-            list.Add(new Language("rw", "Rwandi"));
-            list.Add(new Language("sa", "Sanskrit"));
-            list.Add(new Language("sc", "Sardinian"));
-            list.Add(new Language("scn", "Sicilian"));
-            list.Add(new Language("sco", "Scots"));
-            list.Add(new Language("sd", "Sindhi"));
-            list.Add(new Language("se", "Northern Sami"));
-            list.Add(new Language("sg", "Sango"));
-            list.Add(new Language("sh", "Serbo-Croatian"));
-            list.Add(new Language("si", "Sinhalese"));
-            list.Add(new Language("sim", "pleSimple English"));
-            list.Add(new Language("sk", "Slovak"));
-            list.Add(new Language("sl", "Slovenian"));
-            list.Add(new Language("sm", "Samoan"));
-            list.Add(new Language("sn", "Shona"));
-            list.Add(new Language("so", "Somalia"));
-            list.Add(new Language("sq", "Albanian"));
-            list.Add(new Language("sr", "Serbian"));
-            list.Add(new Language("ss", "Swati"));
-            list.Add(new Language("st", "Southern Sotho"));
-            list.Add(new Language("su", "Sundanese"));
-            list.Add(new Language("sv", "Swedish"));
-            list.Add(new Language("sw", "Swahili"));
-            list.Add(new Language("ta", "Tamil"));
-            list.Add(new Language("te", "Telugu"));
-            list.Add(new Language("tet", "Tetum"));
-            list.Add(new Language("tg", "Tajik"));
-            list.Add(new Language("th", "Thai"));
-            list.Add(new Language("ti", "Tigrinya"));
-            list.Add(new Language("tk", "Turkmen"));
-            list.Add(new Language("tl", "Tagalog"));
-            list.Add(new Language("tlh", "Klingon"));
-            list.Add(new Language("tn", "Tswana"));
-            list.Add(new Language("to", "Tonga"));
-            list.Add(new Language("tpi", "Tok Pisin"));
-            list.Add(new Language("tr", "Turkish"));
-            list.Add(new Language("ts", "Tsonga"));
-            list.Add(new Language("tt", "Tatar"));
-            list.Add(new Language("tum", "Tumbuka"));
-            list.Add(new Language("tw", "Twi"));
-            list.Add(new Language("ty", "Tahitian"));
-            list.Add(new Language("udm", "Udmurt"));
-            list.Add(new Language("ug", "Uyghur"));
-            list.Add(new Language("uk", "Ukrainian"));
-            list.Add(new Language("ur", "Urdu"));
-            list.Add(new Language("uz", "Uzbek"));
-            list.Add(new Language("uz_", "AFUzbeki Afghanistan"));
-            list.Add(new Language("ve", "Venda"));
-            list.Add(new Language("vi", "Vietnamese"));
-            list.Add(new Language("vec", "Venetian"));
-            list.Add(new Language("vls", "West Flemish"));
-            list.Add(new Language("vo", "Volapük"));
-            list.Add(new Language("wa", "Walloon"));
-            list.Add(new Language("war", "Waray"));
-            list.Add(new Language("wo", "Wolof"));
-            list.Add(new Language("xal", "Kalmyk"));
-            list.Add(new Language("xh", "Xhosa"));
-            list.Add(new Language("xmf", "Megrelian"));
-            list.Add(new Language("yi", "Yiddish"));
-            list.Add(new Language("yo", "Yoruba"));
-            list.Add(new Language("za", "Zhuang"));
-            list.Add(new Language("zh", "Chinese"));
-            list.Add(new Language("zh-classical", "Classical Chinese"));
-            list.Add(new Language("zh-min-nan", "Minnan"));
-            list.Add(new Language("zh-yue", "Cantonese"));
-            list.Add(new Language("zu", "Zulu"));
+            List<Language> list = new List<Language>
+            {
+                new Language("bo", "Boro"),
+                new Language("aa", "Afar"),
+                new Language("ab", "Abkhazian"),
+                new Language("af", "Afrikaans"),
+                new Language("ak", "Akan"),
+                new Language("als", "Alemannic"),
+                new Language("am", "Amharic"),
+                new Language("an", "Aragonese"),
+                new Language("ang", "Angal"),
+                new Language("ar", "Arabic"),
+                new Language("arc", "Aramaic"),
+                new Language("as", "Assamese"),
+                new Language("ast", "Asturian"),
+                new Language("av", "Avar"),
+                new Language("awa", "Awadhi"),
+                new Language("ay", "Aymara"),
+                new Language("az", "Azerbaijani"),
+                new Language("ba", "Bashkir"),
+                new Language("bar", "Bavarian"),
+                new Language("bat-smg", "Samogitian"),
+                new Language("bcl", "Bikol"),
+                new Language("be", "Belarusian"),
+                new Language("bg", "Bulgarian"),
+                new Language("bh", "Bihari"),
+                new Language("bi", "Bislama"),
+                new Language("bm", "Bambara"),
+                new Language("bn", "Bengali"),
+                new Language("bo", "Tibetan"),
+                new Language("bpy", "Bishnupriya Manipuri"),
+                new Language("br", "Breton"),
+                new Language("bs", "Bosnian"),
+                new Language("bug", "Buginese"),
+                new Language("bxr", "Buriat (Russia)"),
+                new Language("ca", "Catalan"),
+                new Language("cdo", "Min Dong Chinese"),
+                new Language("ce", "Chechen"),
+                new Language("ceb", "Cebuano"),
+                new Language("ch", "Chamorro"),
+                new Language("cho", "Choctaw"),
+                new Language("chr", "Cherokee"),
+                new Language("chy", "Cheyenne"),
+                new Language("co", "Corsican"),
+                new Language("cr", "Cree"),
+                new Language("cs", "Czech"),
+                new Language("csb", "Kashubian"),
+                new Language("cu", "Old Church Slavonic"),
+                new Language("cv", "Chuvash"),
+                new Language("cy", "Welsh"),
+                new Language("da", "Danish"),
+                new Language("de", "German"),
+                new Language("diq", "Dimli"),
+                new Language("dsb", "Lower Sorbian"),
+                new Language("dv", "Divehi"),
+                new Language("dz", "Dzongkha"),
+                new Language("ee", "Ewe"),
+                new Language("el", "Greek"),
+                new Language("en", "English"),
+                new Language("eo", "Esperanto"),
+                new Language("es", "Spanish"),
+                new Language("et", "Estonian"),
+                new Language("eu", "Basque"),
+                new Language("ext", "Extremaduran"),
+                new Language("fa", "Persian"),
+                new Language("ff", "Peul"),
+                new Language("fi", "Finnish"),
+                new Language("fiu-vro", "Võro"),
+                new Language("fj", "Fijian"),
+                new Language("fo", "Faroese"),
+                new Language("fr", "French"),
+                new Language("frp", "Arpitan"),
+                new Language("fur", "Friulian"),
+                new Language("fy", "West Frisian"),
+                new Language("ga", "Irish"),
+                new Language("gan", "Gan Chinese"),
+                new Language("gbm", "Garhwali"),
+                new Language("gd", "Scottish Gaelic"),
+                new Language("gil", "Gilbertese"),
+                new Language("gl", "Galician"),
+                new Language("gn", "Guarani"),
+                new Language("got", "Gothic"),
+                new Language("gu", "Gujarati"),
+                new Language("gv", "Manx"),
+                new Language("ha", "Hausa"),
+                new Language("hak", "Hakka Chinese"),
+                new Language("haw", "Hawaiian"),
+                new Language("he", "Hebrew"),
+                new Language("hi", "Hindi"),
+                new Language("ho", "Hiri Motu"),
+                new Language("hr", "Croatian"),
+                new Language("ht", "Haitian"),
+                new Language("hu", "Hungarian"),
+                new Language("hy", "Armenian"),
+                new Language("hz", "Herero"),
+                new Language("ia", "Interlingua"),
+                new Language("id", "Indonesian"),
+                new Language("ie", "Interlingue"),
+                new Language("ig", "Igbo"),
+                new Language("ii", "Sichuan Yi"),
+                new Language("ik", "Inupiak"),
+                new Language("ilo", "Ilokano"),
+                new Language("inh", "Ingush"),
+                new Language("io", "Ido"),
+                new Language("is", "Icelandic"),
+                new Language("it", "Italian"),
+                new Language("iu", "Inuktitut"),
+                new Language("ja", "Japanese"),
+                new Language("jbo", "Lojban"),
+                new Language("jv", "Javanese"),
+                new Language("ka", "Georgian"),
+                new Language("kg", "Kongo"),
+                new Language("ki", "Kikuyu"),
+                new Language("kj", "Kuanyama"),
+                new Language("kk", "Kazakh"),
+                new Language("kl", "Greenlandic"),
+                new Language("km", "Cambodian"),
+                new Language("kn", "Kannada"),
+                new Language("khw", "Khowar"),
+                new Language("ko", "Korean"),
+                new Language("kr", "Kanuri"),
+                new Language("ks", "Kashmiri"),
+                new Language("ksh", "Ripuarian"),
+                new Language("ku", "Kurdish"),
+                new Language("kv", "Komi"),
+                new Language("kw", "Cornish"),
+                new Language("ky", "Kirghiz"),
+                new Language("la", "Latin"),
+                new Language("lad", "Ladino"),
+                new Language("lan", "Lango"),
+                new Language("lb", "Luxembourgish"),
+                new Language("lg", "Ganda"),
+                new Language("li", "Limburgian"),
+                new Language("lij", "Ligurian"),
+                new Language("lmo", "Lombard"),
+                new Language("ln", "Lingala"),
+                new Language("lo", "Laotian"),
+                new Language("lzz", "Laz"),
+                new Language("lt", "Lithuanian"),
+                new Language("lv", "Latvian"),
+                new Language("map-bms", "Banyumasan"),
+                new Language("mg", "Malagasy"),
+                new Language("man", "Mandarin"),
+                new Language("mh", "Marshallese"),
+                new Language("mi", "Maori"),
+                new Language("min", "Minangkabau"),
+                new Language("mk", "Macedonian"),
+                new Language("ml", "Malayalam"),
+                new Language("mn", "Mongolian"),
+                new Language("mo", "Moldovan"),
+                new Language("mr", "Marathi"),
+                new Language("mrh", "Mara"),
+                new Language("ms", "Malay"),
+                new Language("mt", "Maltese"),
+                new Language("mus", "Creek"),
+                new Language("mwl", "Mirandese"),
+                new Language("my", "Burmese"),
+                new Language("na", "Nauruan"),
+                new Language("nah", "Nahuatl"),
+                new Language("nap", "Neapolitan"),
+                new Language("nd", "North Ndebele"),
+                new Language("nds", "Low German"),
+                new Language("nds-nl", "Dutch Low Saxon"),
+                new Language("ne", "Nepali"),
+                new Language("new", "Newar"),
+                new Language("ng", "Ndonga"),
+                new Language("nl", "Dutch"),
+                new Language("nn", "Norwegian Nynorsk"),
+                new Language("no", "Norwegian"),
+                new Language("nr", "South Ndebele"),
+                new Language("nso", "Northern Sotho"),
+                new Language("nrm", "Norman"),
+                new Language("nv", "Navajo"),
+                new Language("ny", "Chichewa"),
+                new Language("oc", "Occitan"),
+                new Language("oj", "Ojibwa"),
+                new Language("om", "Oromo"),
+                new Language("or", "Oriya"),
+                new Language("os", "Ossetian"),
+                new Language("pa", "Panjabi"),
+                new Language("pag", "Pangasinan"),
+                new Language("pam", "Kapampangan"),
+                new Language("pap", "Papiamentu"),
+                new Language("pdc", "Pennsylvania German"),
+                new Language("pi", "Pali"),
+                new Language("pih", "Norfolk"),
+                new Language("pl", "Polish"),
+                new Language("pms", "Piedmontese"),
+                new Language("ps", "Pashto"),
+                new Language("pt", "Portuguese"),
+                new Language("qu", "Quechua"),
+                new Language("rm", "Raeto Romance"),
+                new Language("rmy", "Romani"),
+                new Language("rn", "Kirundi"),
+                new Language("ro", "Romanian"),
+                new Language("roa-rup", "Aromanian"),
+                new Language("ru", "Russian"),
+                new Language("rw", "Rwandi"),
+                new Language("sa", "Sanskrit"),
+                new Language("sc", "Sardinian"),
+                new Language("scn", "Sicilian"),
+                new Language("sco", "Scots"),
+                new Language("sd", "Sindhi"),
+                new Language("se", "Northern Sami"),
+                new Language("sg", "Sango"),
+                new Language("sh", "Serbo-Croatian"),
+                new Language("si", "Sinhalese"),
+                new Language("sim", "pleSimple English"),
+                new Language("sk", "Slovak"),
+                new Language("sl", "Slovenian"),
+                new Language("sm", "Samoan"),
+                new Language("sn", "Shona"),
+                new Language("so", "Somalia"),
+                new Language("sq", "Albanian"),
+                new Language("sr", "Serbian"),
+                new Language("ss", "Swati"),
+                new Language("st", "Southern Sotho"),
+                new Language("su", "Sundanese"),
+                new Language("sv", "Swedish"),
+                new Language("sw", "Swahili"),
+                new Language("ta", "Tamil"),
+                new Language("te", "Telugu"),
+                new Language("tet", "Tetum"),
+                new Language("tg", "Tajik"),
+                new Language("th", "Thai"),
+                new Language("ti", "Tigrinya"),
+                new Language("tk", "Turkmen"),
+                new Language("tl", "Tagalog"),
+                new Language("tlh", "Klingon"),
+                new Language("tn", "Tswana"),
+                new Language("to", "Tonga"),
+                new Language("tpi", "Tok Pisin"),
+                new Language("tr", "Turkish"),
+                new Language("ts", "Tsonga"),
+                new Language("tt", "Tatar"),
+                new Language("tum", "Tumbuka"),
+                new Language("tw", "Twi"),
+                new Language("ty", "Tahitian"),
+                new Language("udm", "Udmurt"),
+                new Language("ug", "Uyghur"),
+                new Language("uk", "Ukrainian"),
+                new Language("ur", "Urdu"),
+                new Language("uz", "Uzbek"),
+                new Language("uz_", "AFUzbeki Afghanistan"),
+                new Language("ve", "Venda"),
+                new Language("vi", "Vietnamese"),
+                new Language("vec", "Venetian"),
+                new Language("vls", "West Flemish"),
+                new Language("vo", "Volapük"),
+                new Language("wa", "Walloon"),
+                new Language("war", "Waray"),
+                new Language("wo", "Wolof"),
+                new Language("xal", "Kalmyk"),
+                new Language("xh", "Xhosa"),
+                new Language("xmf", "Megrelian"),
+                new Language("yi", "Yiddish"),
+                new Language("yo", "Yoruba"),
+                new Language("za", "Zhuang"),
+                new Language("zh", "Chinese"),
+                new Language("zh-classical", "Classical Chinese"),
+                new Language("zh-min-nan", "Minnan"),
+                new Language("zh-yue", "Cantonese"),
+                new Language("zu", "Zulu")
+            };
             return list;
         }
     }

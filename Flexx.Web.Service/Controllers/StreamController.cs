@@ -13,7 +13,7 @@ namespace com.drewchaseproject.net.Flexx.Web.Service.Controllers
         {
             string path = Media.Libraries.LibraryListModel.Singleton.GetByName(library).Movies.GetByName(movie).Path;
             FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
-            var file = File(stream, "video/mp4");
+            FileStreamResult file = File(stream, "video/mp4");
             file.EnableRangeProcessing = true;
             return file;
         }
