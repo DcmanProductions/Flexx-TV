@@ -3,6 +3,9 @@ using Xabe.FFmpeg;
 
 namespace com.drewchaseproject.net.Flexx.Media.Libraries.Data
 {
+    /// <summary>
+    /// Gets Important information from the video file
+    /// </summary>
     public class VideoInformation
     {
         public string Duration => $"{Hours}h {Minutes}m";

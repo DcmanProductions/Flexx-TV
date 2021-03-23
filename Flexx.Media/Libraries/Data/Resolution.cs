@@ -3,6 +3,9 @@ using System.Linq;
 
 namespace com.drewchaseproject.net.Flexx.Media.Libraries.Data
 {
+    /// <summary>
+    /// Gets resolution based on width and height
+    /// </summary>
     public class Resolution
     {
         public string Display { get; private set; }
@@ -36,15 +39,17 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Data
                     case >= 200:
                         Display = "240p";
                         break;
-                    default: break;
+                    case < 200:
+                        Display = "TINY";
+                        break;
                 }
-                for (int i = 0; i < Names.Count(); i++)
-                {
-                    if (Width == Widths.ElementAt(i) && Height == Heights.ElementAt(i))
-                    {
-                        Display = Names.ElementAt(i);
-                    }
-                }
+                //for (int i = 0; i < Names.Count(); i++)
+                //{
+                //    if (Width == Widths.ElementAt(i) && Height == Heights.ElementAt(i))
+                //    {
+                //        Display = Names.ElementAt(i);
+                //    }
+                //}
             }
         }
 
