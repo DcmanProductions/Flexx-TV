@@ -9,10 +9,16 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies.Extras
     {
         private string JSONResponse => new System.Net.WebClient().DownloadString($"https://api.themoviedb.org/3/movie/{Movie.TMDBID}/credits?api_key={Values.TheMovieDBAPIKey}");
         private MovieModel Movie { get; set; }
+        //private MediaModel Series { get; set; }
 
-        public CastMembers(MovieModel _movie)
+        public CastMembers(MovieModel _model)
         {
-            Movie = _movie;
+            Movie = _model;
+            GenerateCastMembers(JSONResponse);
+        }
+        public CastMembers(MediaModel _model)
+        {
+            Movie = (MovieModel) _model;
             GenerateCastMembers(JSONResponse);
         }
 
