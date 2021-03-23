@@ -16,23 +16,63 @@
 }
 else
 {
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="~/css/movieView.css" />
-    <link rel="stylesheet" href="~/css/Media.css" />
-    <link rel="stylesheet" href="/css/plyr.css" />
-    <link rel="stylesheet" href="/css/videoplayer.css">
-    <div id="videoView">
-        <div id="exitBtn" onclick="window.location.href = '/Media/Movies/@Model.Title'">X</div>
-        <div class="container">
-            <video controls data-plyr="pip" src="@Model.DirectVideoTrailer"></video>
+    <link rel="stylesheet" href="/css/video.css">
+    <div id="video">
+        <div id="videoOverlay" class="overlayActive">
+            <div id="overlayBG"></div>
+            <div id="videoTitle">
+                @Model.Title
+                <div id="videoYear">Trailer</div>
+            </div>
+            <div id="closeBtn" onclick="window.location.href = '/Media/Movies/@Model.Title'">
+                <img src="/images/svg/Close.svg" alt="">
+            </div>
+            <div id="bigPlay">
+                <img class="playBtn" src="/images/svg/play-solid.svg" alt="">
+            </div>
+            <div id="Navigation">
+                <div id="progress">
+                    <div id="video-progress-completed"></div>
+                </div>
+                <div id="settings">
+                    <img src="/images/svg/sliders-h-solid.svg" alt="">
+                </div>
+                <div id="skipBackward">
+                    <img src="/images/svg/step-backward-solid.svg" alt="">
+                </div>
+                <div id="backward">
+                    <img src="/images/svg/fast-backward-solid.svg" alt="">
+                </div>
+                <div id="play">
+                    <img class="playBtn" src="/images/svg/play-solid.svg" alt="">
+                </div>
+                <div id="forward">
+                    <img src="/images/svg/fast-forward-solid.svg" alt="">
+                </div>
+                <div id="skipForward">
+                    <img src="/images/svg/step-forward-solid.svg" alt="">
+                </div>
+                <div id="volume">
+                    <div id="volume-progress-completed"></div>
+                </div>
+                <div id="timestamp">
+                    <div id="currentTime">00:00</div>
+                    <div id="timeStampSeperator"></div>
+                    <div id="totalTime">00:00</div>
+                    <div id="timeStampSeperator"></div>
+                    <div id="endTime">00:00</div>
+                </div>
+                <div id="fullscreenBtn">
+                    <img src="/images/svg/expand-solid.svg" alt="">
+                </div>
+            </div>
         </div>
-        <script src="/js/plyr.js"></script>
-        <script src="/js/videoplayer.js"></script>
+        <video src="@Model.DirectVideoTrailer"></video>
     </div>
-
+    <script src="/js/video.js"></script>
     <script>
-    player.on("ended", event => {
-        window.location.href = '/Media/Movies/@Model.Title';
-    });
+        video.addEventListener("ended", () => {
+            window.location.href = '/Media/Movies/@Model.Title';
+        });
     </script>
 }

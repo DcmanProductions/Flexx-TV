@@ -1,7 +1,0 @@
-* {
-    --plyr-color-main: var(--primary);
-}
-
-.plyr__video-wrapper{
-    height: 100vh;
-}
