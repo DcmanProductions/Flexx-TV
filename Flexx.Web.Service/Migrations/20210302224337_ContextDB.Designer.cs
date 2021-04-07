@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using com.drewchaseproject.net.Flexx.Web.Service.Data;
+using Flexx.Web.Service.Data;
 
-namespace com.drewchaseproject.net.Flexx.Web.Service.Migrations
+namespace Flexx.Web.Service.Migrations
 {
     [DbContext(typeof(Context))]
     [Migration("20210302224337_ContextDB")]
@@ -156,7 +156,7 @@ namespace com.drewchaseproject.net.Flexx.Web.Service.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("com.drewchaseproject.net.Flexx.Web.Service.Areas.Identity.Data.FlexxUser", b =>
+            modelBuilder.Entity("Flexx.Web.Service.Areas.Identity.Data.FlexxUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -232,7 +232,7 @@ namespace com.drewchaseproject.net.Flexx.Web.Service.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("com.drewchaseproject.net.Flexx.Web.Service.Areas.Identity.Data.FlexxUser", null)
+                    b.HasOne("Flexx.Web.Service.Areas.Identity.Data.FlexxUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -241,7 +241,7 @@ namespace com.drewchaseproject.net.Flexx.Web.Service.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("com.drewchaseproject.net.Flexx.Web.Service.Areas.Identity.Data.FlexxUser", null)
+                    b.HasOne("Flexx.Web.Service.Areas.Identity.Data.FlexxUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -256,7 +256,7 @@ namespace com.drewchaseproject.net.Flexx.Web.Service.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("com.drewchaseproject.net.Flexx.Web.Service.Areas.Identity.Data.FlexxUser", null)
+                    b.HasOne("Flexx.Web.Service.Areas.Identity.Data.FlexxUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -265,7 +265,7 @@ namespace com.drewchaseproject.net.Flexx.Web.Service.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("com.drewchaseproject.net.Flexx.Web.Service.Areas.Identity.Data.FlexxUser", null)
+                    b.HasOne("Flexx.Web.Service.Areas.Identity.Data.FlexxUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

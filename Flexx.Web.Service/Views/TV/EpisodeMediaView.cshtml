@@ -1,0 +1,81 @@
+﻿@model Flexx.Media.Libraries.Series.Episode
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<link rel="stylesheet" href="~/css/movieView.css" />
+<link rel="stylesheet" href="~/css/Media.css" />
+<style>
+    body{
+        background: url(@Model.Series.CoverURL);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+@Html.PartialAsync("Library/_Nav").Result
+<script>
+    changeActiveNavItem(-1);
+</script>
+<div id="overlay" class="shadowed-bg"></div>
+<div id="movie">
+    <div id="moviePoster" style="background: url( @Model.Season.PosterURL );background-repeat: no-repeat;background-size: cover;">
+        @if (Model.WatchedDuration > 0)
+        {
+            <div class="mediaPosterProgressIndicator_XL" style="width: @(Model.WatchPercentage*100)%;"></div>
+        }
+        <div id="actions">
+            <ul class="center">
+                @if (Model.WatchedDuration > 0)
+                {
+                    <li>
+                        <div id="resumeBtn" onclick="window.location.href = '/Library/TV/@Model.Series.Title/Season/@Model.Season.Number/Episode/@Model.Number/Watch'">Resume</div>
+                    </li>
+                    <li>
+                        <div id="playBtn" onclick="window.location.href = '/Library/TV/@Model.Series.Title/Season/@Model.Season.Number/Episode/@Model.Number/Watch/begin'">Start from Beginning</div>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <div id="playBtn" onclick="window.location.href = '/Library/TV/@Model.Series.Title/Season/@Model.Season.Number/Episode/@Model.Number/Watch'">Play</div>
+                    </li>
+
+                }
+            </ul>
+        </div>
+    </div>
+    <div id="overview">
+        <div class="shadowed-bg"></div>
+        <div id="movieTitle">@Model.Title</div>
+        <div id="movieTitleSeperator"></div>
+        <div id="movieSummery">@Model.Summery</div>
+
+        <div id="movieStats">
+            <div id="length" style="background-color: #494949;padding-top: 5px;min-width: 83px;padding-left: 10px;padding-right: 10px;">@Model.Information.Duration</div>
+            @if (Model.Information != null && Model.Information.Resolution != null && !string.IsNullOrWhiteSpace(Model.Information.Resolution.Display))
+            {
+                <div id="resolution" style="top: 0px;right: 50px;">@Model.Information.Resolution.Display</div><br>
+            }
+        </div>
+        @if (Model.Series.Actors != null && Model.Series.Actors.Count > 0)
+        {
+            <div id="cast">
+                <ul>
+                    @for (int i = 0; i < Model.Series.Actors.Count(); i++)
+                    {
+                        if (i >= 5) break;
+
+                        <li>
+                            <div class="castCard">
+                                <img class="castImage" src="@Model.Series.Actors[i].ProfilePictureURL" />
+                                <div class="actorName">@Model.Series.Actors[i].ActorName</div>
+                                <div class="actorRole">@Model.Series.Actors[i].CharacterName</div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+</div>

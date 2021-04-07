@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "TV";
+    Flexx.Media.Libraries.LibraryModel lib;
+}
+<link rel="stylesheet" href="/css/Media.css">
+@Html.PartialAsync("Library/_Nav").Result
+@try
+{
+    lib = Flexx.Media.Libraries.LibraryListModel.Singleton.TV;
+}
+catch (Flexx.Core.Exceptions.LibraryNotFoundException)
+{
+    lib = null;
+}
+@if (lib == null || lib.Series.Count == 0)
+{
+    <div class="shadowed-bg page-overlay"></div>
+    <div class="Media">
+        <div class="itemCarosel">
+            <div class="caroselTitle">No Shows Found!</div>
+            <div class="caroselSeperator"></div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="shadowed-bg page-overlay"></div>
+    <div class="Media">
+        <div class="itemCarosel">
+            <div class="caroselTitle">TV</div>
+            <div class="caroselSeperator"></div>
+            <div id="view">
+
+            </div>
+        </div>
+    </div>
+    <script>
+    $("#view").load("/api/media/tv/list");
+    document.querySelector('body').style.background = 'url(@Flexx.Media.Libraries.LibraryListModel.Singleton.TV.Series[0].CoverURL)'
+    document.querySelector('body').style.backgroundRepeat = "no-repeat"
+    document.querySelector('body').style.backgroundSize = "cover"
+    document.querySelector('body').style.backgroundAttachment = "fixed"
+    </script>
+
+    @if (Flexx.Core.Data.Values.Singleton.ScanningMovies)
+    {
+        <script>
+            setInterval(() => {
+                $("#view").load("/api/media/tv/list");
+            }, 10000);
+        </script>
+    }
+}
+<script>
+    changeActiveNavItem(1);
+</script>

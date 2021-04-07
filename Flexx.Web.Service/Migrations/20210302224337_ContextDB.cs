@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace com.drewchaseproject.net.Flexx.Web.Service.Migrations
+namespace Flexx.Web.Service.Migrations
 {
     public partial class ContextDB : Migration
     {

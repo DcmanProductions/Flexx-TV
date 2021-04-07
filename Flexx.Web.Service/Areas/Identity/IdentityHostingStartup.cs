@@ -1,12 +1,12 @@
-﻿using com.drewchaseproject.net.Flexx.Web.Service.Areas.Identity.Data;
-using com.drewchaseproject.net.Flexx.Web.Service.Data;
+﻿using Flexx.Web.Service.Areas.Identity.Data;
+using Flexx.Web.Service.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-[assembly: HostingStartup(typeof(com.drewchaseproject.net.Flexx.Web.Service.Areas.Identity.IdentityHostingStartup))]
-namespace com.drewchaseproject.net.Flexx.Web.Service.Areas.Identity
+[assembly: HostingStartup(typeof(Flexx.Web.Service.Areas.Identity.IdentityHostingStartup))]
+namespace Flexx.Web.Service.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup
     {

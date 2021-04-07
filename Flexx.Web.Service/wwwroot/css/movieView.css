@@ -168,11 +168,12 @@
     margin-right: 50px;
     background: white;
     width: 130px;
-    height: 200px;
+    height: 275px;
     color: black;
     text-align: center;
     border-radius: 10px;
     transition: .2s;
+    position: relative;
 }
 
     .castCard:hover {
@@ -181,7 +182,7 @@
     }
 
 img.castImage {
-    height: 150px;
+    width: 100%;
     background-size: cover;
     overflow: hidden;
     margin-bottom: 10px;
@@ -195,7 +196,11 @@ img.castImage {
 
 .actorRole {
     font-size: 9px;
-    font-weight: 300;
+    font-weight: 400;
+    position: absolute;
+    bottom: 15px;
+    text-align: center;
+    width: 100%;
 }
 
 

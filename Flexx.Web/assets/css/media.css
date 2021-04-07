@@ -1,0 +1,131 @@
+@import url('/assets/css/carrosel.css');
+
+body {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    color: white;
+    font-family: 'Monsterat', sans-serif;
+}
+
+.caroselTitle {
+    font-size: 29px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.caroselSeperator {
+    outline: 1px solid white;
+    width: 100%;
+}
+
+.Media {
+    position: relative;
+    margin: 25px;
+}
+
+.mediaItem, .mediaItem img {
+    transition: .2s;
+    width: 210px;
+    height: 315px;
+    margin-right: 25px;
+    margin-bottom: 75px;
+}
+
+    .mediaItem.tv, .mediaItem.tv img {
+        width: 348px;
+        height: 200px;
+    }
+
+
+.itemCarosel ul {
+    height: 375px;
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+
+    .itemCarosel ul li {
+        float: left;
+    }
+
+.mediaItem.seemore {
+    background: var(--background);
+    font-size: 70px;
+    text-align: center;
+    padding-top: 25%;
+}
+
+.mediaItem:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.mediaItem.unwatched {
+    outline: 3px solid var(--primary);
+}
+
+.mediaPosterProgressIndicator {
+    transition: 1.2s;
+    position: absolute;
+    z-index: 1;
+    bottom: 50px;
+    border-bottom: 5px solid var(--primary);
+}
+
+.mediaPosterProgressIndicator_XL {
+    transition: 1.2s;
+    position: absolute;
+    top: 0;
+    border-bottom: 10px solid var(--primary);
+}
+
+.movieTitle {
+    position: absolute;
+    left: 0px;
+    bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    min-width: 210px;
+    text-overflow: ellipsis;
+    max-height: 48px;
+    white-space: nowrap;
+    overflow: hidden;
+    background-color: rgba(1,1,1,.75);
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.movieYear {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    font-style: italic;
+}
+/*
+.SeasonListView{
+    min-height: 75vh;
+    width: 100%;
+    margin-top: 150px;
+}
+
+.SeasonListView ul li{
+    float:left;
+}*/
+
+.SeasonListView {
+    min-height: 75vh;
+    width: 95%;
+    max-width: 95%;
+    margin-top: 150px;
+    margin-left: 50px;
+    margin-right: 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(328px, 1fr));
+    grid-gap: 50px;
+    justify-items: center;
+}
+
+.mediaItem {
+    position: relative;
+}

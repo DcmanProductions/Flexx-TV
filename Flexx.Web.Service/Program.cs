@@ -1,11 +1,12 @@
-using com.drewchaseproject.net.Flexx.Core.Data;
-using com.drewchaseproject.net.Flexx.Media.Libraries;
-using com.drewchaseproject.net.Flexx.Media.Libraries.Data;
+using Flexx.Core.Data;
+using Flexx.Media.Libraries;
+using Flexx.Media.Libraries.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using System.IO;
+using System.Timers;
 
-namespace com.drewchaseproject.net.Flexx.Web.Service
+namespace Flexx.Web.Service
 {
     public class Program
     {
@@ -13,7 +14,16 @@ namespace com.drewchaseproject.net.Flexx.Web.Service
         {
             Configuration.Init();
             _ = Transcoding.Singleton;
-            LibraryListModel.Singleton.CreateLibrary("movies", Path.Combine(Values.RootDirectory, "media"), Values.LibraryType.Movies);
+            var timer = new Timer(10 * 1000);
+            timer.Elapsed += (s, e) =>
+            {
+                //LibraryListModel.Singleton.CreateLibrary(Core.Data.Values.LibraryType.Movies, @"C:\Users\drew_\AppData\Roaming\Chase Labs\Flexx\media\movies");
+                //LibraryListModel.Singleton.CreateLibrary(Values.LibraryType.TV, @"C:\Users\drew_\AppData\Roaming\Chase Labs\Flexx\media\tv");
+                //LibraryListModel.Singleton.CreateLibrary(Values.LibraryType.Movies, @"Z:\Movies");
+                //LibraryListModel.Singleton.CreateLibrary(Values.LibraryType.TV, @"Z:\Tv Shows");
+                timer.Close();
+            };
+            timer.Start();
             try
             {
                 CreateHostBuilder(args).Build().Run();

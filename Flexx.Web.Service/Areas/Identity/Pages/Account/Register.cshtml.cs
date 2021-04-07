@@ -1,4 +1,4 @@
-﻿using com.drewchaseproject.net.Flexx.Web.Service.Areas.Identity.Data;
+﻿using Flexx.Web.Service.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -13,7 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace com.drewchaseproject.net.Flexx.Web.Service.Areas.Identity.Pages.Account
+namespace Flexx.Web.Service.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class RegisterModel : PageModel

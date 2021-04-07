@@ -1,14 +1,12 @@
 ﻿@{
     ViewData["Title"] = "Overview";
 }
-<link rel="stylesheet" href="/css/main.css">
-@Html.PartialAsync("Media/_Nav").Result
 <script>
     changeActiveNavItem(-1);
 </script>
 
 @using Microsoft.AspNetCore.Identity
-@using com.drewchaseproject.net.Flexx.Web.Service.Areas.Identity.Data
+@using Flexx.Web.Service.Areas.Identity.Data
 
 @inject SignInManager<FlexxUser> SignInManager
 @inject UserManager<FlexxUser> UserManager

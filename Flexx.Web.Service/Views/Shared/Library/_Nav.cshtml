@@ -1,0 +1,57 @@
+﻿
+@using Microsoft.AspNetCore.Identity
+@using Flexx.Web.Service.Areas.Identity.Data
+@using Flexx.Core.Data
+
+@inject SignInManager<FlexxUser> SignInManager
+@inject UserManager<FlexxUser> UserManager
+@if (!SignInManager.IsSignedIn(User))
+{
+    <script>
+        window.location.href = "@Url.Action("Index", "Welcome")"
+    </script>
+}
+else
+{
+    <div id="backgroundTasks" style="display:none"></div>
+    Values.Singleton.LoggedInUser = User.Identity.Name;
+    <div id="nav">
+        <div id="nav-bg" class="shadowed-bg"></div>
+        <div id="branding" onclick="window.location.href = '@Url.Action("Overview", "Library")'">Flexx</div>
+        <div id="navigation-left">
+            <div class="seperator-vertical" id="navSeperator"></div>
+            <ul>
+                <li>
+                    <div class="navItem active" onclick="window.location.href='@Url.Action("Overview", "Library")'">Home</div>
+                </li>
+                <li>
+                    <div class="navItem" onclick="window.location.href='@Url.Action("Shows", "TV")'">TV Shows</div>
+                </li>
+                <li>
+                    <div class="navItem" onclick="window.location.href='@Url.Action("Movies", "Movie")'">Movies</div>
+                </li>
+                <li>
+                    <div class="navItem">Discover</div>
+                </li>
+            </ul>
+        </div>
+        <div id="navigation">
+            <ul>
+                <li>
+                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Welcome", "Welcome")">
+                        <div class="submenu" id="accountSubMenu">
+                            <div id="logout" class="btn btn-clear-primary submenuTrigger" onclick="window.location.href='@Url.Action("Profile", "Account")'">@UserManager.GetUserName(User)</div>
+                            <div class="submenuBody">
+                                <ul>
+                                    <li><div onclick="window.location.href='@Url.Action("Profile", "Account")'">Profile</div></li>
+                                    <li><div onclick="document.getElementById('logoutForm').submit()">Logout</div></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+}
+<script src="~/js/navigation.js"></script>

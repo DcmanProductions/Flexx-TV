@@ -11,13 +11,21 @@ var volumeProgressBar = document.querySelector('#volume-progress-completed')
 var volumeBar = document.querySelector('#volume')
 var ProgressBar = document.querySelector('#progress')
 var fullscreenButton = document.querySelector('#fullscreenBtn')
-var backwardButton = document.querySelector('#backward')
 
-var stepBackward = document.querySelector('#skipBackward')
-var stepForward = document.querySelector('#skipForward')
+var forwardButton = document.querySelector('#forward').parentElement
+var backwardButton = document.querySelector('#backward').parentElement
+
+var stepBackward = document.querySelector('#skipBackward').parentElement
+var stepForward = document.querySelector('#skipForward').parentElement
 
 var video = document.querySelector('video');
-var playButtons = document.querySelectorAll(".playBtn");
+var playButton = document.querySelector(".playBtn")
+
+var nonactivearea = document.querySelector('#nonActiveArea')
+
+var draggingTrack = false;
+var draggingVolume = false;
+
 function init() {
     updateTimer();
     togglePlaying(true);
@@ -61,67 +69,93 @@ function updateTimer() {
     }
     volumeProgressBar.style.width = video.volume * 100 + "%";
 }
+//VIDEO
+ProgressBar.addEventListener('mousedown', e => {
+    draggingTrack = true;
+    videoProgressBar.style.transition = "0s";
+    ProgressBar.style.transition = "0s";
+});
+
+//VOLUME
+volumeBar.addEventListener('mousedown', e => {
+    draggingVolume = true;
+    volumeBar.style.transition = "0s";
+    volumeProgressBar.style.transition = "0s";
+});
+
+overlay.addEventListener('mouseup', e => {
+    //VIDEO
+    if (draggingTrack) {
+        draggingTrack = false;
+        var pos = (e.pageX - (ProgressBar.offsetLeft + ProgressBar.offsetParent.offsetLeft)) / ProgressBar.offsetWidth;
+        if (pos > 1) pos = 1;
+        if (pos < 0) pos = 0;
+        video.currentTime = pos * video.duration;
+        clearTimeout(timer);
+        videoProgressBar.style.transition = "";
+        ProgressBar.style.transition = "";
+    }
+    //VOLUME
+    if (draggingVolume) {
+        draggingVolume = false;
+        var pos = (e.pageX - (volumeBar.offsetLeft + volumeBar.offsetParent.offsetLeft)) / volumeBar.offsetWidth;
+        if (pos > 1) pos = 1;
+        if (pos < 0) pos = 0;
+        video.volume = pos;
+        clearTimeout(timer);
+        volumeProgressBar.style.transition = "";
+        volumeBar.style.transition = "";
+    }
+});
+overlay.addEventListener('mousemove', e => {
+    //VIDEO
+    if (draggingTrack) {
+        var pos = (e.pageX - (ProgressBar.offsetLeft + ProgressBar.offsetParent.offsetLeft)) / ProgressBar.offsetWidth;
+        if (pos > 1) pos = 1;
+        if (pos < 0) pos = 0;
+        videoProgressBar.style.width = Math.floor(pos * 100) + "%"
+        showOverlay();
+    }
+
+    //VOLUME
+    if (draggingVolume) {
+        var pos = (e.pageX - (volumeBar.offsetLeft + volumeBar.offsetParent.offsetLeft)) / volumeBar.offsetWidth;
+        if (pos > 1) pos = 1;
+        if (pos < 0) pos = 0;
+        volumeProgressBar.style.width = Math.floor(pos * 100) + "%"
+        showOverlay();
+    }
+});
 
 ProgressBar.addEventListener('click', e => {
     var pos = (e.pageX - (ProgressBar.offsetLeft + ProgressBar.offsetParent.offsetLeft)) / ProgressBar.offsetWidth;
     video.currentTime = pos * video.duration;
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-        hideOverlay();
-    }, 1000);
 });
-volumeBar.addEventListener('click', e => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-        hideOverlay();
-    }, 1000);
-});
+document.addEventListener("mouseleave", e => { hideOverlay(); })
+
 volumeBar.addEventListener('click', e => {
     var pos = (e.pageX - (volumeBar.offsetLeft + volumeBar.offsetParent.offsetLeft)) / volumeBar.offsetWidth;
     video.volume = pos;
     updateTimer();
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-        hideOverlay();
-    }, 1000);
 });
 fullscreenButton.addEventListener('click', e => {
     toggleFullscreen();
     clearTimeout(timer);
-    timer = setTimeout(() => {
-        hideOverlay();
-    }, 1000);
 });
 backward.addEventListener('click', e => {
     video.currentTime = 0;
     clearTimeout(timer);
-    timer = setTimeout(() => {
-        hideOverlay();
-    }, 1000);
 });
 stepForward.addEventListener('click', e => {
     video.currentTime += 30;
     clearTimeout(timer);
-    timer = setTimeout(() => {
-        hideOverlay();
-    }, 1000);
 });
 stepBackward.addEventListener('click', e => {
     video.currentTime -= 30;
     clearTimeout(timer);
-    timer = setTimeout(() => {
-        hideOverlay();
-    }, 1000);
 });
 
-overlay.addEventListener("mouseout", () => {
-    if (!video.paused) {
-        timer = setTimeout(() => {
-            hideOverlay();
-        }, 1000);
-    }
-});
-overlay.addEventListener("mouseover", () => {
+nonactivearea.addEventListener("mouseover", () => {
     showOverlay();
     clearTimeout(timer);
     if (!video.paused) {
@@ -130,7 +164,7 @@ overlay.addEventListener("mouseover", () => {
         }, 1000);
     }
 });
-overlay.addEventListener("mousemove", () => {
+nonactivearea.addEventListener("mousemove", () => {
     showOverlay();
     clearTimeout(timer);
     if (!video.paused) {
@@ -139,13 +173,18 @@ overlay.addEventListener("mousemove", () => {
         }, 1000);
     }
 });
-document.querySelector('#overlayBG').addEventListener("click", () => {
+nonactivearea.addEventListener("mouseleave", () => {
+    showOverlay();
+    clearTimeout(timer);
+});
+
+nonactivearea.addEventListener("click", () => {
     togglePlaying();
 });
-playButtons.forEach(e => e.addEventListener("click", () => {
+playButton.parentElement.parentElement.addEventListener("click", () => {
     togglePlaying();
-}));
-document.querySelector('#overlayBG').addEventListener("dblclick", () => {
+});
+nonactivearea.addEventListener("dblclick", () => {
     toggleFullscreen();
 })
 
@@ -190,7 +229,7 @@ function togglePlaying(shouldPlay) {
         play();
     } else if (shouldPlay === false) {
         play();
-        setTimeout(()=>{
+        setTimeout(() => {
             pause();
         }, 100);
     } else {
@@ -204,15 +243,15 @@ function togglePlaying(shouldPlay) {
 
 function play() {
     video.play();
-    playButtons.forEach(e => e.src = "/images/svg/pause-solid.svg");
+    playButton.src = "/images/svg/pause-solid.svg"
     clearTimeout(timer);
     timer = setTimeout(() => {
         hideOverlay();
     }, 1000);
 }
 function pause() {
+    playButton.src = "/images/svg/play-solid.svg"
     video.pause();
-    playButtons.forEach(e => e.src = "/images/svg/play-solid.svg");
     clearTimeout(timer);
 }
 
@@ -226,3 +265,5 @@ function showOverlay() {
 }
 
 init();
+
+loadContextMenuItems(`<div class="custom-cm__item disabled">Flexx TV</div>`);

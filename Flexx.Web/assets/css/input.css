@@ -1,0 +1,134 @@
+
+form {
+    margin: 2em 0;
+  }
+  /**
+  * Make the field a flex-container, reverse the order so label is on top.
+  */
+   
+  .field {
+    display: flex;
+    flex-flow: column-reverse;
+    margin-bottom: 1em;
+  }
+  /**
+  * Add a transition to the label and input.
+  * I'm not even sure that touch-action: manipulation works on
+  * inputs, but hey, it's new and cool and could remove the 
+  * pesky delay.
+  */
+  label, input {
+    transition: all 0.2s;
+    touch-action: manipulation;
+  }
+  
+  input {
+    font-size: 1.5em;
+    border: 0;
+    border-bottom: 1px solid rgb(8, 8, 8);
+    font-family: inherit;
+    -webkit-appearance: none;
+    border-radius: 0;
+    padding: 0;
+    cursor: text;
+    background-color: #2D2D2D;
+    color: white;
+    height: 50px;
+    padding: 10px;
+  }
+  
+  input:focus {
+    outline: 0;
+    border-bottom: 1px solid rgb(255, 255, 255);
+  }
+  
+  label {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 24px;
+  }
+  /**
+  * Translate down and scale the label up to cover the placeholder,
+  * when following an input (with placeholder-shown support).
+  * Also make sure the label is only on one row, at max 2/3rds of the
+  * field—to make sure it scales properly and doesn't wrap.
+  */
+  input:placeholder-shown + label {
+    cursor: text;
+    max-width: 66.66%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transform-origin: left bottom;
+    transform: translate(0, 2.125rem) scale(1.5);
+    opacity: 0;
+  }
+
+  input[type=checkbox]{
+      background-color: white;
+      outline: none;
+      border: none;
+      width: 25px;
+      height: 25px;
+      box-sizing: border-box;
+      padding: 0;
+  }
+
+  input[type=checkbox]:hover, label{
+      cursor: pointer;
+  }
+
+  .checkbox-button {
+    cursor: pointer;
+  }
+
+  html {
+    font-family: Arial;
+  }
+  
+  .checkbox-button {
+    cursor: pointer;
+  }
+  
+  input[type=checkbox] {
+      box-sizing: border-box;
+      padding: 0;
+  }
+  
+  .checkbox-button__input {
+      opacity: 0;
+      position: absolute;
+  }
+  
+  .checkbox-button__control {
+      position: relative;
+      display: inline-block;
+      width: 35px;
+      height: 35px;
+      margin-right: 0px;
+      margin-left: 25%;
+      vertical-align: middle;
+      background-color: inherit;
+      color: #ffffff;
+      border: 2px solid rgb(255, 255, 255);
+  }
+  
+  .checkbox-button__input:checked+.checkbox-button__control:after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      width: 25px;
+      height: 25px;
+      background-color: #ffffff;
+  }
+  
+  .checkbox-button__input:checked+.checkbox-button__control {
+      border-color: #ffffff;
+  }
+  
+  .checkbox-button__control {
+    transform: scale(0.75);
+  }
+  

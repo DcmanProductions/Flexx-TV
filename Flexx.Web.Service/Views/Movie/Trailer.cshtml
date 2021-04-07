@@ -1,0 +1,20 @@
+﻿@model Flexx.Media.Libraries.Movies.MovieModel
+@{
+    ViewData["Title"] = $"Playing Trailer for {Model.Title}";
+}
+
+@using Microsoft.AspNetCore.Identity
+@using Flexx.Web.Service.Areas.Identity.Data
+@inject SignInManager<FlexxUser> SignInManager
+@inject UserManager<FlexxUser> UserManager
+
+@if (!SignInManager.IsSignedIn(User))
+{
+    <script>
+        window.location.href = "@Url.Action("Index", "Welcome")"
+    </script>
+}
+else
+{
+    @Html.PartialAsync("VideoPlayer", Model, new ViewDataDictionary(ViewData) { { "trailer", true } }).Result;
+}
