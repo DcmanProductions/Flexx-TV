@@ -1,0 +1,12 @@
+﻿CREATE TABLE [dbo].[Series]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Title] NCHAR(10) NOT NULL, 
+    [Year] SMALLINT NOT NULL, 
+    [Summery] VARCHAR(255) NOT NULL, 
+    [TMDBID] INT NOT NULL, 
+    [SMDB] VARCHAR(1024) NULL, 
+    [Season] TINYINT NOT NULL, 
+    [Episode] SMALLINT NOT NULL, 
+    [File] VARCHAR(1024) NOT NULL
+)

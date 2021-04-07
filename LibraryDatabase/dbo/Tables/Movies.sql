@@ -1,0 +1,12 @@
+﻿CREATE TABLE [dbo].[Movies]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Title] NCHAR(10) NOT NULL, 
+    [Year] SMALLINT NOT NULL, 
+    [Summery] VARCHAR(255) NOT NULL, 
+    [TMDBID] INT NOT NULL, 
+    [SMD] VARCHAR(1024) NULL, 
+    [File] VARCHAR(1024) NOT NULL, 
+    [CoverURL] VARCHAR(255) NOT NULL, 
+    [PosterURL] VARCHAR(255) NOT NULL
+)
