@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace com.drewchaseproject.net.Flexx.Core.Exceptions
+namespace Flexx.Core.Exceptions
 {
     public class LibraryNotFoundException : Exception
     {

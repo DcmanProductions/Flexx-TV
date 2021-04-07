@@ -1,4 +1,4 @@
-﻿namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies.Extras
+﻿namespace Flexx.Media.Libraries.Movies.Extras
 {
     public class CastMember
     {

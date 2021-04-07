@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace com.drewchaseproject.net.Flexx.Core.Data
+namespace Flexx.Core.Data
 {
     /// <summary>
     /// A Collection of variables used by all facets of the application.
@@ -66,6 +66,19 @@ namespace com.drewchaseproject.net.Flexx.Core.Data
                 return path;
             }
         }
+        public static string UserCacheDirectory
+        {
+            get
+            {
+                string path = Path.Combine(LibDirectory, "Users");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                return path;
+            }
+        }
         public static string FFMPEGDirectory
         {
             get
@@ -121,6 +134,17 @@ namespace com.drewchaseproject.net.Flexx.Core.Data
             return input;
         }
         #endregion
-
+        public bool ScanningMovies { get; set; }
+        public bool ScanningTV { get; set; }
+        public string LoggedInUser { get; set; }
+        public ChaseLabs.CLConfiguration.List.ConfigManager UserProfile
+        {
+            get
+            {
+                _usrProfile = _usrProfile ?? new ChaseLabs.CLConfiguration.List.ConfigManager(Path.Combine(UserCacheDirectory, string.IsNullOrWhiteSpace(LoggedInUser) ? "Guest" : LoggedInUser), true);
+                return _usrProfile;
+            }
+        }
+        private ChaseLabs.CLConfiguration.List.ConfigManager _usrProfile = null;
     }
 }

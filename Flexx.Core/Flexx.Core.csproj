@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>com.drewchaseproject.net.Flexx.Core</RootNamespace>
+    <RootNamespace>Flexx.Core</RootNamespace>
     <AssemblyName>flexxLib</AssemblyName>
   </PropertyGroup>
 
@@ -12,8 +12,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ChaseLabs.Configuration" Version="0.0.4" />
+    <PackageReference Include="ChaseLabs.Configuration" Version="0.0.6" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CLConfiguration">
+      <HintPath>C:\Users\drew_\Documents\DLLs\netstandard2.0\CLConfiguration.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

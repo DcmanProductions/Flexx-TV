@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <AssemblyName>flexxMediaLib</AssemblyName>
-    <RootNamespace>com.drewchaseproject.net.Flexx.Media</RootNamespace>
+    <RootNamespace>Flexx.Media</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -12,6 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ChaseLabs.Configuration" Version="0.0.6" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
@@ -24,5 +25,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Flexx.Core\Flexx.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CLConfiguration">
+      <HintPath>C:\Users\drew_\Documents\DLLs\netstandard2.0\CLConfiguration.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

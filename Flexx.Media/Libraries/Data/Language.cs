@@ -1,4 +1,4 @@
-﻿namespace com.drewchaseproject.net.Flexx.Media.Libraries.Data
+﻿namespace Flexx.Media.Libraries.Data
 {
     public class Language
     {

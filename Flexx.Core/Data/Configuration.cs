@@ -1,7 +1,7 @@
 ﻿using ChaseLabs.CLConfiguration.List;
 using System.IO;
 
-namespace com.drewchaseproject.net.Flexx.Core.Data
+namespace Flexx.Core.Data
 {
     /// <summary>
     /// Persistent Data that will be saved to various config files based on category.

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace com.drewchaseproject.net.Flexx.Media.Libraries.Data
+namespace Flexx.Media.Libraries.Data
 {
     /// <summary>
     /// Gets resolution based on width and height

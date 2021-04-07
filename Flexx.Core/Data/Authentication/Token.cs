@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace com.drewchaseproject.net.Flexx.Core.Data.Authentication
+namespace Flexx.Core.Data.Authentication
 {
     public class Token
     {

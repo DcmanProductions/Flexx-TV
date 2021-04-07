@@ -1,7 +1,7 @@
-﻿using com.drewchaseproject.net.Flexx.Core.Exceptions;
+﻿using Flexx.Core.Exceptions;
 using System.Collections.Generic;
 
-namespace com.drewchaseproject.net.Flexx.Media.Libraries
+namespace Flexx.Media.Libraries
 {
     /// <summary>
     /// A List of all <seealso cref="LibraryModel"/> currently loaded in FLEXX
@@ -24,23 +24,8 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries
         }
         #endregion
 
-        /// <summary>
-        /// Gets the Library from the Library Name.<br />
-        /// Throws <see cref="LibraryNotFoundException"/> if no library is found
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        public LibraryModel GetByName(string name)
-        {
-            foreach (LibraryModel model in this)
-            {
-                if (model.Name.ToLower().Equals(name.ToLower()))
-                {
-                    return model;
-                }
-            }
-            throw new LibraryNotFoundException($"{name} was not found as a loaded library. Maybe it needs to be loaded or its missing.");
-        }
+        public LibraryModel Movies { get; private set; }
+        public LibraryModel TV { get; private set; }
 
         /// <summary>
         /// Creates a new Library
@@ -48,12 +33,13 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries
         /// <param name="Name"></param>
         /// <param name="Path"></param>
         /// <returns></returns>
-        public LibraryModel CreateLibrary(string Name, string Path, Core.Data.Values.LibraryType type)
+        public LibraryModel CreateLibrary(Core.Data.Values.LibraryType type, string Path)
         {
-
-            LibraryModel model = new LibraryModel() { Name = Name, Path = System.IO.Path.Combine(Path, Name), Type = type };
+            LibraryModel model = new() { Path = Path, Type = type };
             Add(model);
             model.GenerateLibraryItems();
+            if (type == Core.Data.Values.LibraryType.Movies) Movies = model;
+            if (type == Core.Data.Values.LibraryType.TV) TV = model;
             return model;
         }
     }

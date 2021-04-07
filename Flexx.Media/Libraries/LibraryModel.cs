@@ -1,8 +1,9 @@
 ﻿using ChaseLabs.CLConfiguration.List;
-using com.drewchaseproject.net.Flexx.Media.Libraries.Movies;
-using static com.drewchaseproject.net.Flexx.Core.Data.Values;
+using Flexx.Media.Libraries.Movies;
+using Flexx.Media.Libraries.Series;
+using static Flexx.Core.Data.Values;
 
-namespace com.drewchaseproject.net.Flexx.Media.Libraries
+namespace Flexx.Media.Libraries
 {
     /// <summary>
     /// A Library is a collection of Media Objects and various functions to easily use them.
@@ -27,6 +28,11 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries
         /// </summary>
         public MovieListModel Movies { get; private set; }
         /// <summary>
+        /// If <seealso cref="Type"/> is a <seealso cref="LibraryType.SeriesListModel"/><br />
+        /// This will be populated with all movies listed under the <seealso cref="Path"/>
+        /// </summary>
+        public SeriesListModel Series { get; private set; }
+        /// <summary>
         /// Manifest file that contains all pertinent information 
         /// </summary>
         public ConfigManager Manifest => new ConfigManager(System.IO.Path.Combine(Path, $"{Name}.manifest"));
@@ -37,14 +43,14 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries
         /// </summary>
         public void GenerateLibraryItems()
         {
-            if (Type == LibraryType.Movies)
+            switch (Type)
             {
-                // Do Movie Shit
-                Movies = MovieListModel.GenerateListFromLibrary(this);
-            }
-            else if (Type == LibraryType.TV)
-            {
-                // Do Tv Show Shit
+                case LibraryType.Movies:
+                    Movies = MovieListModel.GenerateListFromLibrary(this);
+                    break;
+                case LibraryType.TV:
+                    Series = SeriesListModel.GenerateListFromLibrary(this);
+                    break;
             }
         }
 

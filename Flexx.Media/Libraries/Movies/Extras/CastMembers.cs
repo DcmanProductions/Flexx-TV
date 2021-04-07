@@ -1,25 +1,15 @@
-﻿using com.drewchaseproject.net.Flexx.Core.Data;
+﻿using Flexx.Core.Data;
 using System.Collections.Generic;
 using System.Linq;
-using static com.drewchaseproject.net.Flexx.Media.Libraries.Movies.Extras.CastMember;
+using static Flexx.Media.Libraries.Movies.Extras.CastMember;
 
-namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies.Extras
+namespace Flexx.Media.Libraries.Movies.Extras
 {
     public class CastMembers : List<CastMember>
     {
-        private string JSONResponse => new System.Net.WebClient().DownloadString($"https://api.themoviedb.org/3/movie/{Movie.TMDBID}/credits?api_key={Values.TheMovieDBAPIKey}");
-        private MovieModel Movie { get; set; }
-        //private MediaModel Series { get; set; }
-
-        public CastMembers(MovieModel _model)
+        public CastMembers(MediaModel media)
         {
-            Movie = _model;
-            GenerateCastMembers(JSONResponse);
-        }
-        public CastMembers(MediaModel _model)
-        {
-            Movie = (MovieModel) _model;
-            GenerateCastMembers(JSONResponse);
+            GenerateCastMembers(new System.Net.WebClient().DownloadString($"https://api.themoviedb.org/3/{(media.Library.Type.Equals(Values.LibraryType.Movies) ? "movie" : "tv")}/{media.TMDBID}/credits?api_key={Values.TheMovieDBAPIKey}"));
         }
 
         private CastMembers(List<CastMember> members)
@@ -38,6 +28,27 @@ namespace com.drewchaseproject.net.Flexx.Media.Libraries.Movies.Extras
                 }
             });
             return new CastMembers(temp);
+        }
+
+        public string[] ListOfNames()
+        {
+            string[] value = new string[Count];
+            for (int i = 0; i < Count; i++)
+            {
+                value[i] = this[i].ActorName;
+            }
+            return value;
+        }
+
+        public ActorModel[] ListOfActors()
+        {
+
+            ActorModel[] value = new ActorModel[Count];
+            for (int i = 0; i < Count; i++)
+            {
+                value[i] = new ActorModel() { Name = this[i].ActorName, Character = this[i].CharacterName, ProfileURL = this[i].ProfilePictureURL };
+            }
+            return value;
         }
 
         private void GenerateCastMembers(string response)
