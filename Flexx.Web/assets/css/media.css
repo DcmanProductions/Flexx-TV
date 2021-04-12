@@ -35,6 +35,7 @@ body {
     .mediaItem.tv, .mediaItem.tv img {
         width: 348px;
         height: 200px;
+        margin-bottom:0px;
     }
 
 
@@ -102,26 +103,15 @@ body {
     font-weight: 400;
     font-style: italic;
 }
-/*
-.SeasonListView{
-    min-height: 75vh;
-    width: 100%;
-    margin-top: 150px;
-}
 
-.SeasonListView ul li{
-    float:left;
-}*/
-
-.SeasonListView {
+#SeasonListView {
     min-height: 75vh;
     width: 95%;
     max-width: 95%;
-    margin-top: 150px;
     margin-left: 50px;
     margin-right: 50px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(328px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
     grid-gap: 50px;
     justify-items: center;
 }
