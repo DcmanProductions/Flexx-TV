@@ -66,6 +66,20 @@ namespace Flexx.Core.Data
                 return path;
             }
         }
+        public static string CacheDirectory
+        {
+            get
+            {
+                string path = Path.Combine(LibDirectory, "Cache");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                return path;
+            }
+        }
+
         public static string UserCacheDirectory
         {
             get
