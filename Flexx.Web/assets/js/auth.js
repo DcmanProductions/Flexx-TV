@@ -1,4 +1,3 @@
-import("/assets/js/user.js")
 
 const firebaseConfig = {
     apiKey: "AIzaSyB2rYS67WC8WX3jCaK7xu3aTQSNMITWP5M",
@@ -18,7 +17,6 @@ firebase.auth().onAuthStateChanged(user => {
     if (user) {
         // Has User
         userName = user["email"];
-        // console.log(user)
         try {
             isLoggedIn = true;
             // Showing Elements
@@ -43,7 +41,7 @@ firebase.auth().onAuthStateChanged(user => {
             document.getElementById("flexxRedCTA").href = "/FlexxRED/"
 
             document.getElementById("MovieNavItem").href = "/Library/Movies/"
-            document.getElementById("TVNavItem").href = "#"
+            document.getElementById("TVNavItem").href = "/Library/TV/"
 
             document.getElementById("LogOutNavItem").onclick = event => { firebase.auth().signOut() }
             
