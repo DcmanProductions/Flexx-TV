@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Text;
+﻿using System.Data.SqlClient;
 
 namespace Flexx.Core.Data
 {
-    class Connections
+    internal class Connections
     {
         public static void SaveMovie(ChaseLabs.CLConfiguration.List.ConfigManager smd, string file)
         {
@@ -17,7 +14,7 @@ namespace Flexx.Core.Data
             string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=False";
             SqlConnection cnn = new SqlConnection(connectionString);
             cnn.Open();
-            var cmd = cnn.CreateCommand();
+            SqlCommand cmd = cnn.CreateCommand();
             string cmdString = $"insert Movies (Title, Year, Summery, TMDBID, SMD, File, CoverURL, PosterURL) values ('{title}', {year}, '{summery}', {TMDBID}, '{smd}', '{file}', '{coverUrl}', '{posterUrl}')";
             cmd.CommandText = cmdString;
             cmd.CommandType = System.Data.CommandType.Text;
