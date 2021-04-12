@@ -3,12 +3,6 @@ using Flexx.Media.Libraries;
 using Flexx.Media.Libraries.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Net;
-using System.Timers;
-using LettuceEncrypt;
-
-using Microsoft.AspNetCore.Server.Kestrel.Https;
 
 
 namespace Flexx.Web.API
@@ -19,16 +13,29 @@ namespace Flexx.Web.API
         {
             Configuration.Init();
             _ = Transcoding.Singleton;
-            var timer = new Timer(1 * 1000);
+            var timer = new System.Timers.Timer(1000);
             timer.Elapsed += (s, e) =>
             {
-                LibraryListModel.Singleton.CreateLibrary(Values.LibraryType.Movies, @"C:\Users\drew_\AppData\Roaming\Chase Labs\Flexx\media\movies");
-                //LibraryListModel.Singleton.CreateLibrary(Values.LibraryType.TV, @"C:\Users\drew_\AppData\Roaming\Chase Labs\Flexx\media\tv");
-                //LibraryListModel.Singleton.CreateLibrary(Values.LibraryType.Movies, @"Z:\Movies");
-                //LibraryListModel.Singleton.CreateLibrary(Values.LibraryType.TV, @"Z:\Tv Shows");
-                timer.Close();
+                timer.Stop();
+                timer.Dispose();
             };
-            timer.Start();
+            //timer.Start();
+            LoadLibraries();
+
+            Start(args);
+        }
+
+        private static void LoadLibraries()
+        {
+            LibraryListModel.Singleton.CreateLibrary(Values.LibraryType.TV, @"C:\Users\drew_\AppData\Roaming\Chase Labs\Flexx\media\tv");
+            //LibraryListModel.Singleton.CreateLibrary(Values.LibraryType.TV, @"Z:\Tv Shows");
+
+            LibraryListModel.Singleton.CreateLibrary(Values.LibraryType.Movies, @"C:\Users\drew_\AppData\Roaming\Chase Labs\Flexx\media\movies");
+            //LibraryListModel.Singleton.CreateLibrary(Values.LibraryType.Movies, @"Z:\Movies");
+        }
+
+        private static void Start(string[] args)
+        {
             try
             {
                 CreateHostBuilder(args).Build().Run();
