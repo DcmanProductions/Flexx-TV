@@ -1,5 +1,4 @@
-﻿using Flexx.Core.Exceptions;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Flexx.Media.Libraries
 {
@@ -38,8 +37,16 @@ namespace Flexx.Media.Libraries
             LibraryModel model = new() { Path = Path, Type = type };
             Add(model);
             model.GenerateLibraryItems();
-            if (type == Core.Data.Values.LibraryType.Movies) Movies = model;
-            if (type == Core.Data.Values.LibraryType.TV) TV = model;
+            if (type == Core.Data.Values.LibraryType.Movies)
+            {
+                Movies = model;
+            }
+
+            if (type == Core.Data.Values.LibraryType.TV)
+            {
+                TV = model;
+            }
+
             return model;
         }
     }

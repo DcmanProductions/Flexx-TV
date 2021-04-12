@@ -1,7 +1,6 @@
 ﻿using ChaseLabs.CLConfiguration.List;
 using Flexx.Core.Data;
 using Flexx.Media.Libraries.Data;
-using Flexx.Media.Libraries.Movies;
 using Flexx.Media.Libraries.Movies.Extras;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
@@ -19,32 +18,39 @@ namespace Flexx.Media.Libraries
         /// <summary>
         /// Movie Title
         /// </summary>
-        public string Title { get; protected set; }
+        public string Title { get; set; }
         /// <summary>
         /// Movie Release Year
         /// </summary>
-        public short Year { get; protected set; }
+        public short Year { get; set; }
         /// <summary>
         /// The Movie Database ID
         /// </summary>
-        public int TMDBID { get; protected set; }
+        public int TMDBID { get; set; }
         /// <summary>
         /// The Language of the Original Movie<br />
         /// <b>EX:</b> <i>English</i><br />
         /// <b>EX 2:</b> <i>Italian</i>
         /// </summary>
-        public string Language { get; protected set; }
+        public string Language { get; set; }
         /// <summary>
         /// The Movie summery or synopsis.
         /// </summary>
-        public string Summery { get; protected set; }
+        public string Summery { get; set; }
         public bool Watched
         {
             get
             {
                 if (string.IsNullOrWhiteSpace(Title))
+                {
                     return false;
-                if (Values.Singleton.UserProfile.GetConfigByKey($"Watched {Title}") == null) Watched = false;
+                }
+
+                if (Values.Singleton.UserProfile.GetConfigByKey($"Watched {Title}") == null)
+                {
+                    Watched = false;
+                }
+
                 return Values.Singleton.UserProfile.GetConfigByKey($"Watched {Title}").ParseBoolean();
             }
             set
@@ -52,9 +58,13 @@ namespace Flexx.Media.Libraries
                 if (!string.IsNullOrWhiteSpace(Title))
                 {
                     if (Values.Singleton.UserProfile.GetConfigByKey($"Watched {Title}") == null)
+                    {
                         Values.Singleton.UserProfile.Add($"Watched {Title}", value.ToString());
+                    }
                     else
+                    {
                         Values.Singleton.UserProfile.GetConfigByKey($"Watched {Title}").Value = value.ToString();
+                    }
                 }
             }
         }
@@ -63,9 +73,15 @@ namespace Flexx.Media.Libraries
             get
             {
                 if (string.IsNullOrWhiteSpace(Title))
+                {
                     return 0;
+                }
+
                 if (Values.Singleton.UserProfile.GetConfigByKey($"WatchedDuration {Title}") == null)
+                {
                     WatchedDuration = 0;
+                }
+
                 return Values.Singleton.UserProfile.GetConfigByKey($"WatchedDuration {Title}").ParseInt();
             }
             set
@@ -73,9 +89,13 @@ namespace Flexx.Media.Libraries
                 if (!string.IsNullOrWhiteSpace(Title))
                 {
                     if (Values.Singleton.UserProfile.GetConfigByKey($"WatchedDuration {Title}") == null)
+                    {
                         Values.Singleton.UserProfile.Add($"WatchedDuration {Title}", value.ToString());
+                    }
                     else
+                    {
                         Values.Singleton.UserProfile.GetConfigByKey($"WatchedDuration {Title}").Value = value.ToString();
+                    }
                 }
             }
         }
@@ -85,17 +105,17 @@ namespace Flexx.Media.Libraries
         /// <summary>
         /// 
         /// </summary>
-        public VideoInformation MediaDetails { get; protected set; }
-        public string MPAARating { get; protected set; }
+        public VideoInformation MediaDetails { get; set; }
+        public string MPAARating { get; set; }
         /// <summary>
         /// A Direct URL to the Poster Image
         /// </summary>
-        public string PosterURL { get; protected set; }
-        public List<string> Genres { get; protected set; }
+        public string PosterURL { get; set; }
+        public List<string> Genres { get; set; }
         /// <summary>
         /// A Direct URL to the Cover Image
         /// </summary>
-        public string CoverURL { get; protected set; }
+        public string CoverURL { get; set; }
         /// <summary>
         /// The Path to the Media File
         /// </summary>
@@ -130,7 +150,7 @@ namespace Flexx.Media.Libraries
             {
                 if (_fullCrew == null && !Title.Equals(File))
                 {
-                    _fullCrew = new CastMembers((MediaModel)this);
+                    _fullCrew = new CastMembers(this);
                 }
 
                 return _fullCrew;
@@ -238,7 +258,6 @@ namespace Flexx.Media.Libraries
         /// <returns>Path to the <seealso cref="SMDFile"/> File</returns>
         public virtual string GenerateDetails(bool force = false, ConfigManager _smd = null)
         {
-            System.Console.WriteLine($"Generating Details for {Path}");
             ConfigManager smd;
 
             if (force)
@@ -248,7 +267,9 @@ namespace Flexx.Media.Libraries
             else
             {
                 if (_smd != null)
+                {
                     smd = RetrieveSMD(_smd);
+                }
                 else
                 {
                     if (HasSMD)
@@ -261,7 +282,8 @@ namespace Flexx.Media.Libraries
                     }
                 }
             }
-            InitWatcher();
+            System.Console.WriteLine($"Generating Details for {Path}");
+            //InitWatcher();
             MediaDetails = new VideoInformation(Path);
             return smd.PATH;
         }
@@ -330,16 +352,31 @@ namespace Flexx.Media.Libraries
             // Adds items to the SMD File
             smd.Add("TMDBID", TMDBID.ToString());
             if (Title != null)
+            {
                 smd.Add("Title", Title);
+            }
+
             if (Language != null)
+            {
                 smd.Add("Language", Language);
+            }
+
             smd.Add("Year", Year.ToString());
             if (Summery != null)
+            {
                 smd.Add("Summery", Summery);
+            }
+
             if (CoverURL != null)
+            {
                 smd.Add("Cover", CoverURL);
+            }
+
             if (PosterURL != null)
+            {
                 smd.Add("Poster", PosterURL);
+            }
+
             smd.Add("Watched", false.ToString());
             smd.Add("WatchedDuration", 0.ToString());
             smd.Add("File", Path);
@@ -352,14 +389,17 @@ namespace Flexx.Media.Libraries
         /// <returns></returns>
         protected virtual void GetTitleFromTorrentData()
         {
-            var torrent = new Torrent(File);
+            Torrent torrent = new Torrent(File);
             Title = torrent.Title;
             Year = (short)torrent.Year;
         }
 
         private void DownloadAssets()
         {
-            if (Title.ToLower().Equals(File.ToLower())) return;
+            if (Title.ToLower().Equals(File.ToLower()))
+            {
+                return;
+            }
             //DownloadPoster();
             //DownloadCover();
         }

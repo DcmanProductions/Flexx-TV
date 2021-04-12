@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Flexx.Media\Flexx.Media.csproj" />
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="if $(ConfigurationName) == Release (powershell Compress-Archive -Path  '$(TargetDir)*' -DestinationPath '$(SolutionDir)$(SolutionName).zip' -Force)" />
+  </Target>
+
 </Project>

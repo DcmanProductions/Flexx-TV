@@ -1,13 +1,7 @@
 ﻿using Flexx.Core.Data;
 using Flexx.Media.Libraries;
 using Flexx.Media.Libraries.Movies;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Web.Http.Cors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.IO;
 
 namespace Flexx.Web.API.Controllers
@@ -21,15 +15,20 @@ namespace Flexx.Web.API.Controllers
         {
             object result;
             if (LibraryListModel.Singleton.Movies == null)
+            {
                 result = new
                 {
                     items = "No Movies Found"
                 };
+            }
             else
+            {
+                LibraryListModel.Singleton.Movies.Movies.SortByName();
                 result = new
                 {
                     items = LibraryListModel.Singleton.Movies.Movies.GetMovieListAsJsonObject()
                 };
+            }
             return new JsonResult(result);
         }
 
@@ -39,15 +38,20 @@ namespace Flexx.Web.API.Controllers
             Values.Singleton.LoggedInUser = user;
             object result;
             if (LibraryListModel.Singleton.Movies == null)
+            {
                 result = new
                 {
                     items = "No Movies Found"
                 };
+            }
             else
+            {
+                LibraryListModel.Singleton.Movies.Movies.SortByName();
                 result = new
                 {
                     items = LibraryListModel.Singleton.Movies.Movies.GetMovieListAsJsonObject()
                 };
+            }
             return new JsonResult(result);
         }
 
@@ -95,61 +99,85 @@ namespace Flexx.Web.API.Controllers
         }
 
 
-        [Route("/api/streaming/{user}/{id}/video")]
+        [HttpGet("/api/streaming/{user}/{id}/video")]
         public IActionResult GetFile(int id, string user)
         {
             Values.Singleton.LoggedInUser = user;
-            var mediaFile = LibraryListModel.Singleton.Movies.Movies.GetByID(id);
-            if (mediaFile == null) return new NotFoundResult();
+            MediaModel mediaFile = LibraryListModel.Singleton.Movies.Movies.GetByID(id);
+            if (mediaFile == null)
+            {
+                return new NotFoundResult();
+            }
+
             string path = mediaFile.Path;
             FileStream stream = new(path, FileMode.Open, FileAccess.Read);
-            FileStreamResult file = File(stream, "video/mp4");
-            file.EnableRangeProcessing = true;
+            //stream = Transcoding.Singleton.GetTranscodedStream(path);
+            FileStreamResult file = File(stream, "video/mp4", true);
             return file;
         }
-        [Route("/api/streaming/{id}/trailer")]
+        [HttpGet("/api/streaming/{id}/trailer")]
         public IActionResult GetTrailer(int id)
         {
             MovieModel mediaFile = (MovieModel)LibraryListModel.Singleton.Movies.Movies.GetByID(id);
-            if (mediaFile == null) return new NotFoundResult();
+            if (mediaFile == null)
+            {
+                return new NotFoundResult();
+            }
+
             return RedirectPermanent(mediaFile.DirectVideoTrailer);
         }
-        [Route("/api/streaming/{user}/{id}/save/duration/{seconds}")]
+        [HttpGet("/api/streaming/{user}/{id}/save/duration/{seconds}")]
         public IActionResult SetWatchedDuration(int id, string user, int seconds)
         {
             Values.Singleton.LoggedInUser = user;
-            var mediaFile = LibraryListModel.Singleton.Movies.Movies.GetByID(id);
-            if (mediaFile == null) return new NotFoundResult();
+            MediaModel mediaFile = LibraryListModel.Singleton.Movies.Movies.GetByID(id);
+            if (mediaFile == null)
+            {
+                return new NotFoundResult();
+            }
+
             mediaFile.WatchedDuration = seconds;
             return Ok();
         }
-        [Route("/api/streaming/{user}/{id}/save/watched/{watched}")]
+        [HttpGet("/api/streaming/{user}/{id}/save/watched/{watched}")]
         public IActionResult SetWatched(int id, string user, bool watched)
         {
             Values.Singleton.LoggedInUser = user;
-            var mediaFile = LibraryListModel.Singleton.Movies.Movies.GetByID(id);
-            if (mediaFile == null) return new NotFoundResult();
+            MediaModel mediaFile = LibraryListModel.Singleton.Movies.Movies.GetByID(id);
+            if (mediaFile == null)
+            {
+                return new NotFoundResult();
+            }
+
             mediaFile.Watched = watched;
             mediaFile.WatchedDuration = 0;
             return Ok();
         }
-        [Route("/api/streaming/{user}/{id}/get/duration/")]
+        [HttpGet("/api/streaming/{user}/{id}/get/duration/")]
         public IActionResult GetWatchedDuration(int id, string user)
         {
             Values.Singleton.LoggedInUser = user;
-            var mediaFile = LibraryListModel.Singleton.Movies.Movies.GetByID(id);
-            if (mediaFile == null) return new NotFoundResult(); 
+            MediaModel mediaFile = LibraryListModel.Singleton.Movies.Movies.GetByID(id);
+            if (mediaFile == null)
+            {
+                return new NotFoundResult();
+            }
+
             return new JsonResult(new
             {
                 mediaFile.WatchedDuration
             });
         }
-        [Route("/api/streaming/{user}/{id}/get/watched/")]
+        [HttpGet("/api/streaming/{user}/{id}/get/watched/")]
         public IActionResult GetWatched(int id, string user)
         {
             Values.Singleton.LoggedInUser = user;
-            var mediaFile = LibraryListModel.Singleton.Movies.Movies.GetByID(id);
-            if (mediaFile == null) return new NotFoundResult();
+            MediaModel mediaFile = LibraryListModel.Singleton.Movies.Movies.GetByID(id);
+            if (mediaFile == null)
+            {
+                return new NotFoundResult();
+            }
+
             return new JsonResult(new
             {
                 mediaFile.Watched

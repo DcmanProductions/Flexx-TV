@@ -1,9 +1,4 @@
 ﻿using Flexx.Media.Libraries.Movies.Extras;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Flexx.Media.Libraries.Movies
 {

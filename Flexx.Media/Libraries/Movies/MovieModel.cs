@@ -1,13 +1,7 @@
 ﻿using ChaseLabs.CLConfiguration.List;
 using Flexx.Core.Data;
-using Flexx.Media.Libraries.Data;
 using Flexx.Media.Libraries.Movies.Extras;
-using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net;
-using TorrentTitleParser;
 
 namespace Flexx.Media.Libraries.Movies
 {
@@ -49,8 +43,12 @@ namespace Flexx.Media.Libraries.Movies
         }
         public static new MovieModel LoadFromSMD(ConfigManager smd, LibraryModel library)
         {
-            if (smd.GetConfigByKey("File") == null) return null;
-            var movie = new MovieModel() { Path = smd.GetConfigByKey("File").Value, Library = library };
+            if (smd.GetConfigByKey("File") == null)
+            {
+                return null;
+            }
+
+            MovieModel movie = new MovieModel() { Path = smd.GetConfigByKey("File").Value, Library = library };
             movie.GenerateDetails();
             return movie;
         }

@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flexx.Media", "Flexx.Media\
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "LibraryDatabase", "LibraryDatabase\LibraryDatabase.sqlproj", "{ADE6D9A0-5EB4-4ECF-A186-7A6427740840}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flexx.Web.API", "Flexx.Web.API\Flexx.Web.API.csproj", "{CBEAB6C3-7654-4124-834D-B9288AFC50D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flexx.Web.API", "Flexx.Web.API\Flexx.Web.API.csproj", "{CBEAB6C3-7654-4124-834D-B9288AFC50D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,7 +22,6 @@ Global
 		{50C45B9E-3EB5-4CD7-B9F8-78614DAD2C75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{50C45B9E-3EB5-4CD7-B9F8-78614DAD2C75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50C45B9E-3EB5-4CD7-B9F8-78614DAD2C75}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{50C45B9E-3EB5-4CD7-B9F8-78614DAD2C75}.Release|Any CPU.Build.0 = Release|Any CPU
 		{177D078D-7AD7-4D11-9BAB-A3F432C2A830}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{177D078D-7AD7-4D11-9BAB-A3F432C2A830}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{177D078D-7AD7-4D11-9BAB-A3F432C2A830}.Release|Any CPU.ActiveCfg = Release|Any CPU

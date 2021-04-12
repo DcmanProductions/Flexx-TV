@@ -14,11 +14,18 @@ namespace Flexx.Media.Libraries.Data
             {
                 string tmp = "";
                 if (Hours > 0)
+                {
                     tmp = $"{Hours}h {Minutes}m";
+                }
                 else if (Hours == 0 && Minutes == 0)
+                {
                     tmp = $"{Seconds}s";
+                }
                 else if (Hours == 0 && Minutes > 0)
+                {
                     tmp = $"{Minutes} min";
+                }
+
                 return tmp;
             }
         }
