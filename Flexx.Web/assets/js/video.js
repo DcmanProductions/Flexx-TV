@@ -85,6 +85,39 @@ volumeBar.addEventListener('mousedown', e => {
     volumeProgressBar.style.transition = "0s";
 });
 
+document.addEventListener("keyup", e => {
+    switch (e.keyCode) {
+        case 37:
+            skip(false)
+            break;
+        case 39:
+            skip(true)
+            break;
+        case 38:
+            adjustVolume(true)
+            break;
+        case 40:
+            adjustVolume(false)
+            break;
+        default:
+            let key = e.key;
+            switch (key) {
+                case " ":
+                    togglePlaying();
+                    break;
+                case "f":
+                    toggleFullscreen();
+                    break;
+                default:
+                    alert(key)
+                    break;
+
+            }
+            break;
+
+    }
+})
+
 overlay.addEventListener('mouseup', e => {
     //VIDEO
     if (draggingTrack) {
@@ -149,11 +182,11 @@ backward.addEventListener('click', e => {
     clearTimeout(timer);
 });
 stepForward.addEventListener('click', e => {
-    video.currentTime += 30;
+    skip(true)
     clearTimeout(timer);
 });
 stepBackward.addEventListener('click', e => {
-    video.currentTime -= 30;
+    skip(false)
     clearTimeout(timer);
 });
 
@@ -205,6 +238,28 @@ function toggleFullscreen() {
         closeFullscreen()
     else
         openFullscreen()
+}
+
+function skip(forward) {
+    if (forward) {
+        video.currentTime += 30;
+    } else {
+        video.currentTime -= 30;
+    }
+}
+
+
+function adjustVolume(increment) {
+    if (increment) {
+        let vol = video.volume + .1;
+        vol = vol >= 1 ? 1 : vol;
+        video.volume = vol;
+    } else {
+        let vol = video.volume - .1;
+        vol = vol <= 0 ? 0 : vol;
+        video.volume = vol;
+    }
+    updateTimer()
 }
 
 function openFullscreen() {
@@ -272,6 +327,7 @@ function showOverlay() {
     overlay.style.cursor = "default";
 }
 
+
 init();
 
 // loadContextMenuItems(`<div class="custom-cm__item disabled">Flexx TV</div>`);
@@ -298,7 +354,7 @@ function checkBuffering() {
         bufferingDetected = true
         document.body.appendChild(throbber);
     }
-    
+
     if (bufferingDetected && currentPlayPos > (lastPlayPos + offset) && !video.paused) {
         bufferingDetected = false
         document.body.removeChild(throbber)
