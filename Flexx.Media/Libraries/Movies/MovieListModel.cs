@@ -3,10 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using static Flexx.Core.Data.Utilities.MathUtil;
-using System.Dynamic;
 
 namespace Flexx.Media.Libraries.Movies
 {
@@ -47,7 +46,7 @@ namespace Flexx.Media.Libraries.Movies
 
         public IEnumerable<MovieObjectModel> GetMovieListAsJsonObject()
         {
-            foreach (var movie in this)
+            foreach (MediaModel movie in this)
             {
                 MovieObjectModel model;
                 try
@@ -91,7 +90,7 @@ namespace Flexx.Media.Libraries.Movies
 
         public void SortByName()
         {
-            var list = this.OrderBy(o =>
+            List<MediaModel> list = this.OrderBy(o =>
             {
                 string s = o.Title;
                 s = Regex.Replace(s, $@"\ba\b", "", RegexOptions.IgnoreCase);
@@ -106,8 +105,15 @@ namespace Flexx.Media.Libraries.Movies
         {
             foreach (MovieModel item in this)
             {
-                if (item.Path.Equals(movie.Path)) return true;
-                if (item.Title.Equals(movie.Title) && item.Year.Equals(movie.Year)) return true;
+                if (item.Path.Equals(movie.Path))
+                {
+                    return true;
+                }
+
+                if (item.Title.Equals(movie.Title) && item.Year.Equals(movie.Year))
+                {
+                    return true;
+                }
             }
             return false;
         }
@@ -139,7 +145,7 @@ namespace Flexx.Media.Libraries.Movies
                 IEnumerable<string[]> chunks = GetChunk(files, chunkSize);
                 for (int i = 0; i < chunks.Count(); i++)
                 {
-                    model.RunChunk(chunks.ToArray()[i]).ContinueWith(t => t.Dispose());
+                    model.RunChunksAsync(chunks.ToArray()[i]).ContinueWith(t => t.Dispose());
                 }
 
 
@@ -180,37 +186,60 @@ namespace Flexx.Media.Libraries.Movies
             return model;
         }
 
-        private Task RunChunk(string[] files)
+        private Task RunChunksAsync(string[] files)
         {
             return Task.Run(() =>
             {
                 foreach (string file in files)
                 {
-                    if (new FileInfo(file).Length > 1000)
-                    {
-                        try
-                        {
-                            MovieModel value = new() { Path = file, Library = library };
-                            string smd = value.GenerateDetails();
-                            if (!string.IsNullOrWhiteSpace(value.PosterURL) && !string.IsNullOrWhiteSpace(value.CoverURL))
-                            {
-                                Add(value);
-                            }
-                        }
-                        catch
-                        {
-                            Console.WriteLine($"Couldn't Load {file}");
-                        }
-                    }
-                    else if (new FileInfo(file).Name.ToLower().Contains("sample"))
-                    {
-                    }
-                    else if (new FileInfo(file).Length < 1000)
-                    {
-                    }
+                    RunChunk(file);
                 }
                 SortByName();
             });
+        }
+
+        private void RunChunk(string file, int attempt = 0)
+        {
+            if (new FileInfo(file).Length > 1000)
+            {
+                try
+                {
+                    MovieModel value = new() { Path = file, Library = library };
+                    string smd = value.GenerateDetails();
+                    if (!string.IsNullOrWhiteSpace(value.PosterURL) && !string.IsNullOrWhiteSpace(value.CoverURL))
+                    {
+                        try
+                        {
+                            Add(value);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine($"\n\nERROR MESSAGE: {e.Message}\n{e.StackTrace}\n\n");
+                            Console.WriteLine($"Couldn't Load {file}");
+                            if (attempt < 5)
+                            {
+                                Console.WriteLine($"Trying to Load {file} again");
+                                System.Threading.Thread.Sleep(1000);
+                                RunChunk(file, attempt + 1);
+                                //Environment.Exit(0);
+                            }
+                            else
+                            {
+                                Console.WriteLine($"{file} will be disgarded.");
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+                }
+            }
+            else if (new FileInfo(file).Name.ToLower().Contains("sample"))
+            {
+            }
+            else if (new FileInfo(file).Length < 1000)
+            {
+            }
         }
 
     }
