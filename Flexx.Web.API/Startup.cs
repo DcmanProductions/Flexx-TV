@@ -1,20 +1,15 @@
+using Flexx.Core.Data;
+using LettuceEncrypt;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using LettuceEncrypt;
-using Flexx.Core.Data;
 
 namespace Flexx.Web.API
 {
     public class Startup
     {
-        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        private readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors(options =>
@@ -22,7 +17,7 @@ namespace Flexx.Web.API
                 options.AddPolicy(name: MyAllowSpecificOrigins,
                                   builder =>
                                   {
-                                      builder.WithOrigins("https://flexx-tv.tk", "http://127.0.0.1:5500")
+                                      builder.WithOrigins("https://flexx-tv.tk", "http://flexx-tv.tk", "http://127.0.0.1:5500")
                                                   .AllowAnyHeader()
                                                   .AllowAnyMethod(); ;
                                   });
@@ -38,7 +33,7 @@ namespace Flexx.Web.API
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseRouting();
 
             app.UseCors(MyAllowSpecificOrigins);
