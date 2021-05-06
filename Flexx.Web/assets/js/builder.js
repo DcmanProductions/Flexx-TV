@@ -1,3 +1,4 @@
+document.title = `${document.title} - FlexxTV`
 let uri = document.baseURI.replaceAll(document.baseURI.split('/')[document.baseURI.split('/').length - 1], "")+window.location.hash;
 window.history.pushState("", "", uri);
 Array.from(document.getElementsByClassName("builder")).forEach(item => {
