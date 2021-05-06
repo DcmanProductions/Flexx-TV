@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flexx.Web.Service", "Flexx.Web.Service\Flexx.Web.Service.csproj", "{50C45B9E-3EB5-4CD7-B9F8-78614DAD2C75}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flexx.Core", "Flexx.Core\Flexx.Core.csproj", "{177D078D-7AD7-4D11-9BAB-A3F432C2A830}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flexx.Media", "Flexx.Media\Flexx.Media.csproj", "{2C737AA7-785F-4E7F-A9B5-04ADF0B223C8}"
@@ -19,9 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{50C45B9E-3EB5-4CD7-B9F8-78614DAD2C75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{50C45B9E-3EB5-4CD7-B9F8-78614DAD2C75}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{50C45B9E-3EB5-4CD7-B9F8-78614DAD2C75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{177D078D-7AD7-4D11-9BAB-A3F432C2A830}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{177D078D-7AD7-4D11-9BAB-A3F432C2A830}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{177D078D-7AD7-4D11-9BAB-A3F432C2A830}.Release|Any CPU.ActiveCfg = Release|Any CPU
