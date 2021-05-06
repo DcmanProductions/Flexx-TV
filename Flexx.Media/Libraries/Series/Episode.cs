@@ -72,6 +72,8 @@ namespace Flexx.Media.Libraries.Series
             Summery = Summery,
             Watched = Watched,
             PosterURL = PosterURL,
+            ShowPosterURL = Series.PosterURL,
+            ShowCoverURL = Series.CoverURL,
             Duration = Information.Duration,
             Resolution = Information.Resolution.Display,
             WatchedDuration = WatchedDuration,
