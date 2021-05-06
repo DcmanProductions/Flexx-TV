@@ -10,6 +10,10 @@ namespace Flexx.Web.API.Controllers
     [Route("/api/streaming/movies")]
     public class MovieStreamingController : ControllerBase
     {
+        /// <summary>
+        /// Gets all movies loaded by Flexx
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("get")]
         public IActionResult GetAllMovies()
         {
@@ -31,7 +35,11 @@ namespace Flexx.Web.API.Controllers
             }
             return new JsonResult(result);
         }
-
+        /// <summary>
+        /// Gets all movies loaded by Flexx with user data
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         [HttpGet("{user}/get")]
         public IActionResult GetAllMovies(string user)
         {
@@ -54,7 +62,11 @@ namespace Flexx.Web.API.Controllers
             }
             return new JsonResult(result);
         }
-
+        /// <summary>
+        /// Gets a specific movie from the TheMovieDatabase ID number.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("get/{id}")]
         public IActionResult GetMovie(int id)
         {
@@ -76,6 +88,12 @@ namespace Flexx.Web.API.Controllers
             return new JsonResult(result);
         }
 
+        /// <summary>
+        /// Gets a specific movie from the TheMovieDatabase ID number with user information
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="user"></param>
+        /// <returns></returns>
         [HttpGet("{user}/get/{id}")]
         public IActionResult GetMovie(int id, string user)
         {
@@ -83,7 +101,7 @@ namespace Flexx.Web.API.Controllers
             object result = new
             {
                 items = "No Movie Found"
-            }; ;
+            };
             if (LibraryListModel.Singleton.Movies != null)
             {
                 MovieObjectModel model = LibraryListModel.Singleton.Movies.Movies.GetMovieAsJsonObject(id);
@@ -99,22 +117,36 @@ namespace Flexx.Web.API.Controllers
         }
 
 
-        [HttpGet("/api/streaming/{user}/{id}/video")]
+        /// <summary>
+        /// Gets the video file stream based on TheMovieDatabase ID.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        [HttpGet("{user}/{id}/video")]
         public IActionResult GetFile(int id, string user)
         {
             Values.Singleton.LoggedInUser = user;
             MediaModel mediaFile = LibraryListModel.Singleton.Movies.Movies.GetByID(id);
             if (mediaFile == null)
             {
-                return new NotFoundResult();
+                object result = new
+                {
+                    items = "No Movie Found"
+                };
+                return new JsonResult(result);
             }
 
             string path = mediaFile.Path;
             FileStream stream = new(path, FileMode.Open, FileAccess.Read);
-            //stream = Transcoding.Singleton.GetTranscodedStream(path);
             FileStreamResult file = File(stream, "video/mp4", true);
             return file;
         }
+        /// <summary>
+        /// Gets the movie trailer stream.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("/api/streaming/{id}/trailer")]
         public IActionResult GetTrailer(int id)
         {
@@ -126,7 +158,14 @@ namespace Flexx.Web.API.Controllers
 
             return RedirectPermanent(mediaFile.DirectVideoTrailer);
         }
-        [HttpGet("/api/streaming/{user}/{id}/save/duration/{seconds}")]
+        /// <summary>
+        /// Sets the watched duration in seconds.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="user"></param>
+        /// <param name="seconds"></param>
+        /// <returns></returns>
+        [HttpGet("{user}/{id}/save/duration/{seconds}")]
         public IActionResult SetWatchedDuration(int id, string user, int seconds)
         {
             Values.Singleton.LoggedInUser = user;
@@ -139,7 +178,14 @@ namespace Flexx.Web.API.Controllers
             mediaFile.WatchedDuration = seconds;
             return Ok();
         }
-        [HttpGet("/api/streaming/{user}/{id}/save/watched/{watched}")]
+        /// <summary>
+        /// Sets rather a movie has been watched or not.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="user"></param>
+        /// <param name="watched"></param>
+        /// <returns></returns>
+        [HttpGet("{user}/{id}/save/watched/{watched}")]
         public IActionResult SetWatched(int id, string user, bool watched)
         {
             Values.Singleton.LoggedInUser = user;
@@ -153,7 +199,13 @@ namespace Flexx.Web.API.Controllers
             mediaFile.WatchedDuration = 0;
             return Ok();
         }
-        [HttpGet("/api/streaming/{user}/{id}/get/duration/")]
+        /// <summary>
+        /// Gets the watched duration in seconds.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        [HttpGet("{user}/{id}/get/duration/")]
         public IActionResult GetWatchedDuration(int id, string user)
         {
             Values.Singleton.LoggedInUser = user;
@@ -168,7 +220,13 @@ namespace Flexx.Web.API.Controllers
                 mediaFile.WatchedDuration
             });
         }
-        [HttpGet("/api/streaming/{user}/{id}/get/watched/")]
+        /// <summary>
+        /// Gets rather the movie has been watched
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        [HttpGet("{user}/{id}/get/watched/")]
         public IActionResult GetWatched(int id, string user)
         {
             Values.Singleton.LoggedInUser = user;

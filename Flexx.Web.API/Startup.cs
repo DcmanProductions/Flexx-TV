@@ -12,17 +12,11 @@ namespace Flexx.Web.API
         private readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options =>
-            {
-                options.AddPolicy(name: MyAllowSpecificOrigins,
-                                  builder =>
-                                  {
-                                      builder.WithOrigins("https://flexx-tv.tk", "http://flexx-tv.tk", "http://127.0.0.1:5500")
-                                                  .AllowAnyHeader()
-                                                  .AllowAnyMethod(); ;
-                                  });
-            });
+            // Specifies allowed sites via the COR Policy - Cross Origin Policy.
+            services.AddCors(options => options.AddPolicy(name: MyAllowSpecificOrigins, builder => builder.WithOrigins("https://flexx-tv.tk", "http://flexx-tv.tk", "http://127.0.0.1:5500", "http://127.0.0.1:3223").AllowAnyHeader().AllowAnyMethod()));
+            // Adding dynamic HTTPS encryption using LettuceEncrypt
             services.AddLettuceEncrypt().PersistDataToDirectory(new System.IO.DirectoryInfo(System.IO.Path.Combine(Values.LibDirectory, ".cert")), "flexx-tv"); ;
+            // Adds the ability to use the MVC structure.
             services.AddControllers();
         }
 
@@ -31,13 +25,16 @@ namespace Flexx.Web.API
         {
             if (env.IsDevelopment())
             {
+                // Runs if the application detects its being run in a dev environment
                 app.UseDeveloperExceptionPage();
             }
-            //app.UseHttpsRedirection();
+            // Allows the usage of route pre-processor above methods and classes
             app.UseRouting();
 
+            // Adds specified COR Policy
             app.UseCors(MyAllowSpecificOrigins);
 
+            // Specifies endpoint template.
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
