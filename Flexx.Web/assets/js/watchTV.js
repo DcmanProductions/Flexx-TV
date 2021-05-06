@@ -7,10 +7,12 @@ var timer = setInterval(()=>{
 
 
 function Init(){
-    if (!window.location.hash) window.location.href = "/Library/Movies/";
-    const id = window.location.hash.replace("#", "");
+    if (!window.location.hash) window.location.href = "/Library/TV/";
+    var id = window.location.hash.replace("#", "").split('-')[0].replace("-", "");
+    var season = window.location.hash.replace("#", "").split('-')[1].replace("-", "");
+    var episode = window.location.hash.replace("#", "").split('-')[2].replace("-", "");
     const streamingAPI = `${server}/api/streaming/${userName}/${id}`
-    const returnAddress = `/Library/Movies/View/#${id}`;
+    const returnAddress = `/Library/TV/Seasons/Episodes/#${id}-${season}`;
     
     video.src = `${streamingAPI}/video`;
     
