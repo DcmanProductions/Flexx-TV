@@ -44,8 +44,9 @@ namespace Flexx.Media.Libraries.Movies
             return model;
         }
 
-        public IEnumerable<MovieObjectModel> GetMovieListAsJsonObject()
+        public MovieObjectModel[] GetMovieListAsJsonObject()
         {
+            List<MovieObjectModel> models = new();
             foreach (MediaModel movie in this)
             {
                 MovieObjectModel model;
@@ -70,10 +71,11 @@ namespace Flexx.Media.Libraries.Movies
                         WatchedDuration = movie.WatchedDuration,
                         WatchedPercentage = (int)Math.Floor(movie.WatchPercentage * 100),
                     };
+                    models.Add(model);
                 }
                 catch { continue; }
-                yield return model;
             }
+            return models.ToArray();
         }
 
         public MovieObjectModel GetMovieAsJsonObject(int id)

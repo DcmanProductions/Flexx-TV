@@ -48,20 +48,24 @@ namespace Flexx.Media.Libraries.Series
             }
         }
 
-        public IEnumerable<string> GetSeasonNames()
+        public string[] GetSeasonNames()
         {
+            List<string> models = new();
             for (int i = 0; i < Seasons.ToArray().Length; i++)
             {
-                yield return Seasons[i].Name;
+                models.Add(Seasons[i].Name);
             }
+            return models.ToArray();
         }
 
-        public IEnumerable<SeasonObjectModel> GetSeasonsObjectModel()
+        public SeasonObjectModel[] GetSeasonsObjectModel()
         {
+            List<SeasonObjectModel> models = new();
             for (int i = 0; i < Seasons.ToArray().Length; i++)
             {
-                yield return Seasons[i].objectModel;
+                models.Add(Seasons[i].objectModel);
             }
+            return models.ToArray();
         }
 
         public SeriesModel()

@@ -30,12 +30,14 @@ namespace Flexx.Media.Libraries.Series
         }
 
 
-        public IEnumerable<EpisodeObjectModel> GetEpisodesObjectModel()
+        public EpisodeObjectModel[] GetEpisodesObjectModel()
         {
+            List<EpisodeObjectModel> models = new();
             for (int i = 0; i < Episodes.ToArray().Length; i++)
             {
-                yield return Episodes[i].objectModel;
+                models.Add(Episodes[i].objectModel);
             }
+            return models.ToArray();
         }
 
         public SeasonObjectModel objectModel => new()
