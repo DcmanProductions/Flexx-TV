@@ -20,6 +20,16 @@ namespace Flexx.Media.Libraries.Data
             FFmpeg.SetExecutablesPath(Values.FFMPEGDirectory);
         }
 
+        public static bool Instaciate()
+        {
+            if(_singleton == null)
+            {
+                _ = new Transcoding();
+                return true;
+            }
+            return false;
+        }
+
         public FileStream GetTranscodedStream(string file)
         {
             //var stream = FFmpeg.GetMediaInfo(file).Result.Streams.ToArray()[0];
