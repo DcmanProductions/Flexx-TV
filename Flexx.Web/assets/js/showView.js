@@ -1,4 +1,27 @@
 import("/assets/js/user.js")
+
+var throbber = document.createElement("div")
+throbber.className = "spinner"
+throbber.id = "loading"
+throbber.style.width = "64px"
+throbber.style.height = "64px"
+throbber.style.position = "fixed"
+throbber.style.left = "50%"
+throbber.style.top = "50%"
+throbber.style.zIndex = "999"
+
+var background = document.createElement("div")
+background.id = "background"
+background.style.position = "fixed"
+background.style.background = "black"
+background.style.width = "100%"
+background.style.height = "100%"
+background.style.top = "0"
+background.style.left = "0"
+background.appendChild(throbber);
+document.body.appendChild(background);
+document.getElementById("movie").style.display = "none"
+
 var timer = setInterval(() => {
     if (userName != "") {
         if (window.location.hash) {
@@ -74,6 +97,9 @@ var timer = setInterval(() => {
                     document.getElementById("secPlayBtn").addEventListener("click", () => {
                         window.location.href = `/Library/Movies/Watch/#${id}`;
                     });
+                    document.getElementById("backBtn").addEventListener("click", () => {
+                        window.location.href = `/Library/TV/`;
+                    });
                 })
                 .catch((err) => {
                     console.log(err);
@@ -85,6 +111,9 @@ var timer = setInterval(() => {
 
         $("#view").load("/Pages/TV/Seasons/list.html")
 
+        document.getElementById("movie").style.display = ""
+        document.getElementById("loading").remove();
+        document.getElementById("background").remove();
         clearInterval(timer);
     }
-}, 1000)
+}, 100)

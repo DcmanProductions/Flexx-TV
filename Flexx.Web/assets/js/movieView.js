@@ -1,4 +1,28 @@
 import("/assets/js/user.js")
+
+
+let throbber = document.createElement("div")
+throbber.className = "spinner"
+throbber.id = "loading"
+throbber.style.width = "64px"
+throbber.style.height = "64px"
+throbber.style.position = "fixed"
+throbber.style.left = "50%"
+throbber.style.top = "50%"
+throbber.style.zIndex = "999"
+
+let background = document.createElement("div")
+background.id = "background"
+background.style.position = "fixed"
+background.style.background = "black"
+background.style.width = "100%"
+background.style.height = "100%"
+background.style.top = "0"
+background.style.left = "0"
+background.appendChild(throbber);
+document.body.appendChild(background);
+document.getElementById("movie").style.display = "none"
+
 let timer = setInterval(() => {
     if (userName != "") {
         if (window.location.hash) {
@@ -92,6 +116,9 @@ let timer = setInterval(() => {
         } else {
             window.location.href = "/Library/Movies/";
         }
+        document.getElementById("movie").style.display = ""
+        document.getElementById("loading").remove();
+        document.getElementById("background").remove();
         clearInterval(timer);
     }
-}, 1000)
+}, 100)
