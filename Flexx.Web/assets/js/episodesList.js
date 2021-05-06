@@ -19,7 +19,7 @@ var timer = setInterval(() => {
                     let cName = watched ? "" : "unwatched"
                     let episodeGenericName = `S${season > 9 ? season : "0" + season}E${item["number"] > 9 ? item["number"] : "0" + item["number"]}`
                     html += `
-        <div class="mediaItem tv ${cName}" onclick="window.location.href = '/Library/TV/Seasons#${id}'">
+        <div class="mediaItem tv ${cName}" onclick="window.location.href = '/Library/TV/Seasons/Episodes/Episode#${id}-${season}-${item["number"]}'">
         <img src="${item["posterURL"]}" />
         <div class="mediaPosterProgressIndicator" style="width: ${watchedPercentage}%;"></div>
         <div class="movieTitle">

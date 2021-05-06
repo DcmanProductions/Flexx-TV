@@ -31,7 +31,7 @@ firebase.auth().onAuthStateChanged(user => {
             document.getElementById("TVNavItem").hidden = false;
 
             // Setting User Specific Properties
-            document.getElementById("accountProfile").innerHTML = userName
+            document.getElementById("accountProfile").innerHTML = Array.from(userName)[0].toString().toUpperCase();
             if (window.location.pathname == "/" || window.location.pathname == "/About/") {
                 window.location.href = "/Library/";
             }
@@ -44,7 +44,7 @@ firebase.auth().onAuthStateChanged(user => {
             document.getElementById("TVNavItem").href = "/Library/TV/"
 
             document.getElementById("LogOutNavItem").onclick = event => { firebase.auth().signOut() }
-            
+
         } catch { }
     } else {
         // No User
@@ -53,16 +53,16 @@ firebase.auth().onAuthStateChanged(user => {
             // Showing Elements
             document.getElementById("LoginNavItem").hidden = false;
             document.getElementById("RegisterNavItem").hidden = false;
-            
+
             // Hiding Elements
             document.getElementById("LogOutNavItem").hidden = true;
             document.getElementById("MyProfileNavItem").hidden = true;
             document.getElementById("MovieNavItem").hidden = true;
             document.getElementById("TVNavItem").hidden = true;
-            
+
             // Setting User Specific Properties
             document.getElementById("accountProfile").innerHTML = "My Account"
-            if (window.location.pathname.toString().includes("/Library/") || window.location.pathname.toString().includes("/FlexxRED/") ) {
+            if (window.location.pathname.toString().includes("/Library/") || window.location.pathname.toString().includes("/FlexxRED/")) {
                 window.location.href = "/";
             }
             document.getElementById("LogOutNavItem").onclick = event => { alert('Well, well, well... What do we have here.\nA curious one!') }
