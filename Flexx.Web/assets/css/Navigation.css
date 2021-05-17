@@ -1,8 +1,0 @@
-﻿#accountProfile{
-    display: absolute;
-    background: black;
-    width: 50px;
-    height:50px;
-    border-radius: 280px;
-    border: 0px solid var(--primary);
-}
